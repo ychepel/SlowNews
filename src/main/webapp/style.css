@@ -2,17 +2,33 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial,Helvetica,freesans,sans-serif;
-    background-color: #E7E8E1;
+    background-color: #c1c2bb;
 }
 
 .header  {
     background: #333;
     width: 100%;
+    display: inline-block;
 }
 
-.header-menu {
+.logo {
+    float: left;
+    margin-left: 15px;
+}
+
+.logo img {
+    border: 0;
+    height: 50px;
+}
+
+nav.menu {
+    float: right;
+}
+
+.list-menu {
     list-style-type: none;
     overflow: hidden;
+    margin: 0;
 }
 
 .menu-item {
@@ -26,7 +42,7 @@ body {
     font-size: 16px;
     text-decoration: none;
     text-align: center;
-    padding: 14px 16px;
+    padding: 15px 16px;
 }
 
 .menu-item a:hover {
@@ -48,10 +64,14 @@ body {
 }
 
 .item-content {
-    background: #fff;
     width: 100%;
     height: 100%;
     position: relative;
+    background: #f5f6ef;
+}
+
+.item-content:hover {
+    background: #ffffff;
 }
 
 .item-content .teaser-image {
@@ -78,4 +98,14 @@ body {
     text-decoration: none;
     color: #767676;
     font-size: 12px;
+}
+
+.footer {
+    background: #333;
+    color: #999999;
+    font-size: 12px;
+    padding: 15px;
+    text-align: center;
+    float: left;
+    width: 100%;
 }
