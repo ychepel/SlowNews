@@ -1,5 +1,5 @@
 <div class="footer">
-    © Copyright 2016
+    <b>SlowNews</b> © All rights reserved.
 </div>
 </body>
 </html>
