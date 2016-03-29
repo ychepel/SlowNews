@@ -1,5 +1,8 @@
 package com.univer.slownews.servlet;
 
+import com.univer.slownews.model.User;
+import com.univer.slownews.model.UserStorage;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +22,15 @@ public class SignupServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User user = new User(username, email, password);
+
+        UserStorage storage = UserStorage.getInstance();
+        storage.addUser(user);
+
+        doGet(request, response);
     }
 }

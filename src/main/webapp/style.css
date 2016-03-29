@@ -42,7 +42,7 @@ nav.menu {
     font-size: 16px;
     text-decoration: none;
     text-align: center;
-    padding: 15px 16px;
+    padding: 16px;
 }
 
 .menu-item a:hover {
@@ -118,6 +118,11 @@ nav.menu {
 .signup-form {
     display: block;
     width: 300px;
+    margin: 0 auto;
+}
+
+.signup-form ul {
+    padding: 0;
 }
 
 .form-field {
@@ -133,4 +138,43 @@ nav.menu {
     height: 42px;
     border: 1px solid rgba(0,0,0,0.1);
     text-indent: 0.5em;
+}
+
+.form-field button {
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #414858;
+    width: 100%;
+    background-color: #0e65fb;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.form-field button:hover {
+    background-color: #288cfb;
+}
+
+.signup-message {
+    text-align: center;
+    margin: 20px;
+    color: #198627;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+.signup-message a {
+    color: #224A27;
+}
+
+.user-list {
+    margin: 20px;
+}
+
+.user-list th,.user-list td {
+    border: 1px solid gray;
+    padding: 5px;
 }
