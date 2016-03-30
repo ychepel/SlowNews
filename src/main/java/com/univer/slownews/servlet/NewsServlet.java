@@ -16,8 +16,6 @@ import java.util.List;
 @WebServlet("/news")
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pageTitle = "Slow News";
-        request.setAttribute("title", pageTitle);
         request.setAttribute("news", new NewsInitialization().getNews());
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/news.jsp");

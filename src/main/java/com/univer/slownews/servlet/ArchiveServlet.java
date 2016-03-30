@@ -11,8 +11,7 @@ import java.io.IOException;
 @WebServlet("/archive")
 public class ArchiveServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pageTitle = "Archive - Slow News";
-        request.setAttribute("title", pageTitle);
+        request.setAttribute("title", "Archive - Slow News");
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/archive.jsp");
         dispatcher.forward(request, response);

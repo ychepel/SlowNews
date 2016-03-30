@@ -2,7 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>${title}</title>
+    <title>
+        <c:if test="${title != null}">${title}</c:if>
+        <c:if test="${title == null}">Slow News</c:if>
+    </title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>

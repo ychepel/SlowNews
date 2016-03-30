@@ -2,8 +2,8 @@
 
 <c:import url="header.jsp"/>
     <div class="signup-message">
-        <c:if test='${param.username != null}'>
-            User `${param.username}` have been created. To see all accounts <a href="user-list">click here</a>.
+        <c:if test='${message != null}'>
+            ${message} To see all accounts <a href="user-list">click here</a>.
         </c:if>
     </div>
     <div class="user-form">

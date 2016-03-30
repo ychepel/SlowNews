@@ -14,8 +14,7 @@ import java.io.IOException;
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String pageTitle = "Sign Up - Slow News";
-        request.setAttribute("title", pageTitle);
+        request.setAttribute("title", "Sign Up - Slow News");
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/signup.jsp");
         dispatcher.forward(request, response);
@@ -30,6 +29,7 @@ public class SignupServlet extends HttpServlet {
 
         UserStorage storage = UserStorage.getInstance();
         storage.addUser(user);
+        request.setAttribute("message", storage.getMessage());
 
         doGet(request, response);
     }
