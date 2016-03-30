@@ -6,7 +6,6 @@ import java.util.List;
 public class UserStorage {
     private static UserStorage instance;
     private List<User> users;
-    private String message;
 
     public static synchronized UserStorage getInstance() {
         if (instance == null) {
@@ -26,21 +25,23 @@ public class UserStorage {
 
     private UserStorage() {
         users = new ArrayList<>();
-        message = "";
     }
 
     public void addUser(User user) {
         if(!isUserNameInList(user.getName())) {
             users.add(user);
-            message = "User have been created successfully.";
-        }
-        else {
-            message = "Username is already taken. Plese try another one.";
         }
     }
 
-    public String getMessage() {
-        return message;
+    public boolean contains(User tmpUser) {
+        for(User user : users) {
+            if(tmpUser.getName().equals(user.getName())) {
+                if(tmpUser.getPassword().equals(user.getPassword())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public List<User> getUsers() {

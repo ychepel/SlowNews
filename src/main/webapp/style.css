@@ -21,6 +21,14 @@ body {
     height: 50px;
 }
 
+.welcome {
+    float: left;
+    margin-left: 30px;
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
 nav.menu {
     float: right;
 }

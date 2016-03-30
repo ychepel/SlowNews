@@ -29,7 +29,7 @@ public class SignupServlet extends HttpServlet {
 
         UserStorage storage = UserStorage.getInstance();
         storage.addUser(user);
-        request.setAttribute("message", storage.getMessage());
+        request.setAttribute("message", "New user have been created.");
 
         doGet(request, response);
     }
