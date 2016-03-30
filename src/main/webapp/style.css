@@ -67,37 +67,48 @@ nav.menu {
     width: 100%;
     height: 100%;
     position: relative;
-    background: #f5f6ef;
 }
 
-.item-content:hover {
-    background: #ffffff;
+.item-content .text-content {
+    position: absolute;
+    top: 155px;
+    background: #f5f6ef;
+    height: 200px;
 }
 
 .item-content .teaser-image {
     width: 100%;
-    height: 155px;
+    min-height: 155px;
 }
 
-.item-content h1 {
-    font-size: 22px;
+.text-content h1 {
+    font-size: 18px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.item-content .news-body {
-    font-size: 16px;
+.text-content .news-body {
+    font-size: 12px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.item-content .archive-link {
+.text-content .news-links {
+    list-style: none;
     position: absolute;
     bottom: 10px;
     right: 10px;
+    font-size: 12px;
+}
+
+.text-content .news-links li {
+    float: left;
+    padding-left: 20px;
+}
+
+.text-content .news-link {
     text-decoration: none;
     color: #767676;
-    font-size: 12px;
 }
 
 .footer {

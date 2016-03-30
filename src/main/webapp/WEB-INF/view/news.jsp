@@ -8,9 +8,14 @@
             <li class="list-item">
                 <div class="item-content">
                     <img class="teaser-image" src="${newsItem.teaserLink}">
-                    <h1>${newsItem.title}</h1>
-                    <div class="news-body">${newsItem.body}</div>
-                    <a href="#" class="archive-link">add to archive</a>
+                    <div class="text-content">
+                        <h1>${newsItem.title}</h1>
+                        <div class="news-body">${newsItem.body}</div>
+                        <ul class="news-links">
+                            <li><a href="${newsItem.url}" class="news-link" target="_blank">read</a></li>
+                            <li><a href="#" class="news-link">add to archive</a></li>
+                        </ul>
+                    </div>
                 </div>
             </li>
         </c:forEach>

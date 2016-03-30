@@ -4,14 +4,16 @@ public class News {
     private String title;
     private String body;
     private String teaserLink;
+    private String url;
 
     public News() {
     }
 
-    public News(String title, String body, String teaserLink) {
+    public News(String title, String body, String teaserLink, String url) {
         this.title = title;
         this.body = body;
         this.teaserLink = teaserLink;
+        this.url = url;
     }
 
     public void setTitle(String title) {
@@ -27,7 +29,6 @@ public class News {
     }
 
     public String getTitle() {
-
         return title;
     }
 
@@ -37,5 +38,13 @@ public class News {
 
     public String getTeaserLink() {
         return teaserLink;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
