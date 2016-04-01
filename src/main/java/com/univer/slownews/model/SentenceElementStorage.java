@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ElementReader {
-    private static final String RESOURCES_PATH = "src/main/resources/";
+public class SentenceElementStorage {
+    private static final String RESOURCES_PATH = "/WEB-INF/classes/";
     private String fileName;
     private List<String> lines;
 
-    public ElementReader(String fileName) {
+    public SentenceElementStorage(String fileName) {
         this.fileName = fileName;
         readFromFile();
     }
@@ -19,7 +19,8 @@ public class ElementReader {
         lines = new ArrayList<>();
         try (BufferedReader fileBuffer = new BufferedReader(new FileReader(RESOURCES_PATH + fileName));) {
             while (fileBuffer.ready()) {
-                lines.add(fileBuffer.readLine());
+                String s = fileBuffer.readLine();
+                lines.add(s);
             }
         } catch (IOException e) {
             e.printStackTrace();

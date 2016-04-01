@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsWireReader implements NewsReader {
+public class WireNewsReader implements NewsReader {
     private List<News> news;
 
     private void parseWebSite() throws Exception {

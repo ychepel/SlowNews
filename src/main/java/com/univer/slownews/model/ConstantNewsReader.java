@@ -3,7 +3,7 @@ package com.univer.slownews.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsFakeReader implements NewsReader {
+public class ConstantNewsReader implements NewsReader {
 
     public List<News> getNews() {
         List<News> news = new ArrayList<>();

@@ -3,15 +3,21 @@ package com.univer.slownews.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
     private List<News> news;
     private List<String> sentencePatterns = new ArrayList<String>() {{
-            add("%ADJECTIVE SUBJECT VERB %PREPOSITION %ADJECTIVE SUBJECT.");
+            add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
+            add("ADJECTIVE(45) SUBJECT(100): SUBJECT(100) VERB(100) PREPOSITION(15) ADJECTIVE(65) SUBJECT(100).");
     }};
 
     @Override
     public List<News> getNews() {
+        for(int i = 0; i < 10 ; i++) {
+            news.add(getOneNews());
+        }
         return news;
     }
 
@@ -25,27 +31,28 @@ public class NewsGenerator implements NewsReader {
         for (int i = 0; i < count; i++) {
             int randomPattern = new Random().nextInt(sentencePatterns.size());
             String sentencePattern = sentencePatterns.get(randomPattern);
-            String sentence = tranformPattern(sentencePattern);
+            String sentence = transformPattern(sentencePattern);
             textBuilder.append(sentence.substring(0, 1).toUpperCase() + sentence.substring(1) + " ");
         }
         return textBuilder.toString();
     }
 
-    private String tranformPattern(String sentencePattern) {
+    private String transformPattern(String sentencePattern) {
         String sentence = sentencePattern;
         for(SentenceElement sentenceElement : SentenceElement.values()) {
-            ElementReader elements = new ElementReader(sentenceElement.getFileName());
-            while (sentence.indexOf(sentenceElement.name()) >= 0) {
-                if(sentence.indexOf("%" + sentenceElement.name()) >= 0) {
-                    if(Math.random() < 0.5) {
-                        sentence = sentence.replaceFirst("%" + sentenceElement.name(), elements.getRandomElement());
-                    }
-                    else {
-                        sentence = sentence.replaceFirst("%" + sentenceElement.name() + " ", "");
-                    }
+            SentenceElementStorage elementStorage = new SentenceElementStorage(sentenceElement.getFileName());
+            String regex = sentenceElement.name() + "\\(\\d*\\)";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(sentence);
+            while (matcher.find()) {
+                String partToReplace = matcher.group();
+                String partFrequency = partToReplace.substring(partToReplace.indexOf("(") + 1, partToReplace.indexOf(")"));
+                int frequency = Integer.parseInt(partFrequency);
+                if(Math.random() * 100 < frequency) {
+                    sentence = sentence.replaceFirst(regex, elementStorage.getRandomElement());
                 }
                 else {
-                    sentence = sentence.replaceFirst(sentenceElement.name(), elements.getRandomElement());
+                    sentence = sentence.replaceFirst(regex + " ", "");
                 }
             }
         }
@@ -57,9 +64,9 @@ public class NewsGenerator implements NewsReader {
     }
 
     public static void main(String[] args) {
-        NewsGenerator generator = new NewsGenerator();
-        News oneNews = generator.getOneNews();
-        System.out.println("title: " + oneNews.getTitle());
-        System.out.println("body : " + oneNews.getBody());
+        NewsReader newsReader = new NewsGenerator();
+        for(News news : newsReader.getNews()) {
+            System.out.println(news.getTitle());
+        }
     }
 }
