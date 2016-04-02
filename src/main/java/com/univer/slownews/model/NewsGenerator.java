@@ -8,29 +8,49 @@ import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
     private List<News> news;
-    private List<String> sentencePatterns = new ArrayList<String>() {{
+    private String resourcesPath;
+    private List<String> titlePatterns = new ArrayList<String>() {{
             add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
             add("ADJECTIVE(45) SUBJECT(100): SUBJECT(100) VERB(100) PREPOSITION(15) ADJECTIVE(65) SUBJECT(100).");
+            add("VERB(100) ADJECTIVE(60) SUBJECT(100)!");
+    }};
+    private  List<String> bodyPatterns = new ArrayList<String>() {{
+        add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
+        add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100) and ADJECTIVE(45) SUBJECT(100).");
     }};
 
     @Override
     public List<News> getNews() {
-        for(int i = 0; i < 10 ; i++) {
-            news.add(getOneNews());
-        }
+        makeFakeNews(10);
         return news;
     }
 
-    public News getOneNews() {
-        News fake = new News(makeSentences(1), makeSentences(3), "", "");
-        return fake;
+    public void makeFakeNews(int count) {
+        for(int i = 0; i < count ; i++) {
+            String title = makeNewsTitle();
+            String body = makeNewsBody();
+            String imageUrl = "http://lorempixel.com/400/200?random=" + i;
+            News fakeNews = new News(title, body, imageUrl, "");
+            news.add(fakeNews);
+        }
     }
 
-    private String makeSentences(int count) {
+    private String makeNewsTitle() {
+        int randomPattern = new Random().nextInt(titlePatterns.size());
+        String sentencePattern = titlePatterns.get(randomPattern);
+        return makeSentences(sentencePattern, 1);
+    }
+
+    private String makeNewsBody() {
+        System.out.println(bodyPatterns.size());
+        int randomPattern = new Random().nextInt(bodyPatterns.size());
+        String sentencePattern = bodyPatterns.get(randomPattern);
+        return makeSentences(sentencePattern, 5);
+    }
+
+    private String makeSentences(String sentencePattern, int count) {
         StringBuilder textBuilder = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            int randomPattern = new Random().nextInt(sentencePatterns.size());
-            String sentencePattern = sentencePatterns.get(randomPattern);
             String sentence = transformPattern(sentencePattern);
             textBuilder.append(sentence.substring(0, 1).toUpperCase() + sentence.substring(1) + " ");
         }
@@ -40,10 +60,10 @@ public class NewsGenerator implements NewsReader {
     private String transformPattern(String sentencePattern) {
         String sentence = sentencePattern;
         for(SentenceElement sentenceElement : SentenceElement.values()) {
-            SentenceElementStorage elementStorage = new SentenceElementStorage(sentenceElement.getFileName());
+            SentenceElementStorage elementStorage = new SentenceElementStorage(resourcesPath + "/" + sentenceElement.getFileName());
             String regex = sentenceElement.name() + "\\(\\d*\\)";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(sentence);
+            Pattern regexPattern = Pattern.compile(regex);
+            Matcher matcher = regexPattern.matcher(sentence);
             while (matcher.find()) {
                 String partToReplace = matcher.group();
                 String partFrequency = partToReplace.substring(partToReplace.indexOf("(") + 1, partToReplace.indexOf(")"));
@@ -59,14 +79,8 @@ public class NewsGenerator implements NewsReader {
         return sentence;
     }
 
-    public NewsGenerator() {
+    public NewsGenerator(String resourcesPath) {
         news = new ArrayList<>();
-    }
-
-    public static void main(String[] args) {
-        NewsReader newsReader = new NewsGenerator();
-        for(News news : newsReader.getNews()) {
-            System.out.println(news.getTitle());
-        }
+        this.resourcesPath = resourcesPath;
     }
 }

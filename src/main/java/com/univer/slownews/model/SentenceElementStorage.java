@@ -1,12 +1,12 @@
 package com.univer.slownews.model;
 
+import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class SentenceElementStorage {
-    private static final String RESOURCES_PATH = "/WEB-INF/classes/";
     private String fileName;
     private List<String> lines;
 
@@ -17,7 +17,9 @@ public class SentenceElementStorage {
 
     private void readFromFile() {
         lines = new ArrayList<>();
-        try (BufferedReader fileBuffer = new BufferedReader(new FileReader(RESOURCES_PATH + fileName));) {
+
+
+        try (BufferedReader fileBuffer = new BufferedReader(new FileReader(fileName));) {
             while (fileBuffer.ready()) {
                 String s = fileBuffer.readLine();
                 lines.add(s);

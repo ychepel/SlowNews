@@ -12,7 +12,9 @@
                         <h1>${newsItem.title}</h1>
                         <div class="news-body">${newsItem.body}</div>
                         <ul class="news-links">
-                            <li><a href="${newsItem.url}" class="news-link" target="_blank">read</a></li>
+                            <c:if test='${newsItem.url != ""}'>
+                                <li><a href="${newsItem.url}" class="news-link" target="_blank">read</a></li>
+                            </c:if>
                             <li><a href="#" class="news-link">add to archive</a></li>
                         </ul>
                     </div>
