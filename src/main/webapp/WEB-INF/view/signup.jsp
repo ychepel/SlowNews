@@ -1,11 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="header.jsp"/>
-    <div class="signup-message">
-        <c:if test='${message != null}'>
-            ${message} To see all accounts <a href="user-list">click here</a>.
-        </c:if>
-    </div>
+
     <div class="user-form">
     <form class="signup-form" action="signup" method="post">
         <ul>
@@ -16,4 +12,5 @@
         </ul>
     </form>
     </div>
+
 <c:import url="footer.jsp"/>

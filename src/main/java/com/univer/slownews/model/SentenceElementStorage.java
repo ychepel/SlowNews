@@ -19,7 +19,7 @@ public class SentenceElementStorage {
         lines = new ArrayList<>();
 
 
-        try (BufferedReader fileBuffer = new BufferedReader(new FileReader(fileName));) {
+        try (BufferedReader fileBuffer = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));) {
             while (fileBuffer.ready()) {
                 String s = fileBuffer.readLine();
                 lines.add(s);
@@ -30,7 +30,13 @@ public class SentenceElementStorage {
     }
 
     public String getRandomElement() {
-        int randomElement = new Random().nextInt(lines.size());
-        return lines.get(randomElement);
+        if(lines.size() > 0) {
+            int randomElement = new Random().nextInt(lines.size());
+            return lines.get(randomElement);
+        }
+        else {
+            return "";
+        }
     }
+
 }

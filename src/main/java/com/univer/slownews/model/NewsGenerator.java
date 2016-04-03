@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
     private List<News> news;
-    private String resourcesPath;
     private List<String> titlePatterns = new ArrayList<String>() {{
             add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
             add("ADJECTIVE(45) SUBJECT(100): SUBJECT(100) VERB(100) PREPOSITION(15) ADJECTIVE(65) SUBJECT(100).");
@@ -60,7 +59,7 @@ public class NewsGenerator implements NewsReader {
     private String transformPattern(String sentencePattern) {
         String sentence = sentencePattern;
         for(SentenceElement sentenceElement : SentenceElement.values()) {
-            SentenceElementStorage elementStorage = new SentenceElementStorage(resourcesPath + "/" + sentenceElement.getFileName());
+            SentenceElementStorage elementStorage = new SentenceElementStorage(sentenceElement.getFileName());
             String regex = sentenceElement.name() + "\\(\\d*\\)";
             Pattern regexPattern = Pattern.compile(regex);
             Matcher matcher = regexPattern.matcher(sentence);
@@ -79,8 +78,7 @@ public class NewsGenerator implements NewsReader {
         return sentence;
     }
 
-    public NewsGenerator(String resourcesPath) {
+    public NewsGenerator() {
         news = new ArrayList<>();
-        this.resourcesPath = resourcesPath;
     }
 }

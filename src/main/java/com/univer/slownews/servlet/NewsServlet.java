@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/news")
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        NewsReader newsReader = new NewsGenerator(getServletContext().getRealPath("/WEB-INF/classes"));
+        NewsReader newsReader = new NewsGenerator();
         request.setAttribute("news", newsReader.getNews());
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/news.jsp");

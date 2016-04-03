@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+public class LogInServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("title", "Log In - Slow News");
 
@@ -33,10 +33,10 @@ public class LoginServlet extends HttpServlet {
         if(storage.contains(user)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-            request.setAttribute("message", "You are logged!");
+            request.setAttribute("message", "You are logged successfully!");
         }
         else {
-            request.setAttribute("message", "Wrong information. Try Again.");
+            request.setAttribute("error_message", "Wrong information. Please try again.");
         }
 
         doGet(request, response);

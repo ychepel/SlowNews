@@ -2,7 +2,7 @@
 
 <c:import url="header.jsp"/>
 
-<div class="content">
+<form class="content" action="/save" method="post">
     <ul class="news-list">
         <c:forEach items="${news}" var="newsItem">
             <li class="list-item">
@@ -15,6 +15,10 @@
                             <c:if test='${newsItem.url != ""}'>
                                 <li><a href="${newsItem.url}" class="news-link" target="_blank">read</a></li>
                             </c:if>
+                            <label class="massive-checkbox">
+                                <input type="checkbox" name="0">
+                                <span></span>
+                            </label>
                             <li><a href="#" class="news-link">add to archive</a></li>
                         </ul>
                     </div>
@@ -22,6 +26,6 @@
             </li>
         </c:forEach>
     </ul>
-</div>
+</form>
 
 <c:import url="footer.jsp"/>
