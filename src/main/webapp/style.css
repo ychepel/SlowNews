@@ -54,7 +54,7 @@ nav.menu {
     padding: 16px;
 }
 
-.menu-item a:hover {
+.menu .menu-item a:hover {
     background-color: #111;
 }
 
@@ -123,6 +123,10 @@ nav.menu {
 .text-content .news-link {
     text-decoration: none;
     color: #767676;
+    cursor: pointer;
+}
+
+.text-content .archive-checkbox {
 }
 
 .footer {
@@ -210,4 +214,37 @@ nav.menu {
 .user-list th,.user-list td {
     border: 1px solid gray;
     padding: 5px;
+}
+
+.noshow {
+    display: none;
+}
+
+.news-archive-buttons {
+    background: #476;
+    width: 100%;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+    position: fixed;
+    top: 0;
+    height: 50px;
+    z-index: 5;
+}
+
+.news-archive-buttons .list-menu {
+    float: right;
+}
+
+.save-selected, .cancel-saving {
+    cursor: pointer;
+    display: block;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    padding: 16px;
+}
+
+.save-selected:hover, .cancel-saving:hover {
+    background-color: #25463b;
 }

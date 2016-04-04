@@ -1,5 +1,6 @@
 package com.univer.slownews.model;
 
+import javax.lang.model.element.NestingKind;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,15 +9,16 @@ import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
     private List<News> news;
-    private List<String> titlePatterns = new ArrayList<String>() {{
-            add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
-            add("ADJECTIVE(45) SUBJECT(100): SUBJECT(100) VERB(100) PREPOSITION(15) ADJECTIVE(65) SUBJECT(100).");
-            add("VERB(100) ADJECTIVE(60) SUBJECT(100)!");
-    }};
-    private  List<String> bodyPatterns = new ArrayList<String>() {{
-        add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100).");
-        add("ADJECTIVE(35) SUBJECT(100) VERB(100) PREPOSITION(25) ADJECTIVE(65) SUBJECT(100) and ADJECTIVE(45) SUBJECT(100).");
-    }};
+    private static final String[] TITLE_PATTERNS = {
+            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
+            "VERB ADJECTIVE SUBJECT!",
+            "SUBJECT: SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT."
+    };
+    private static final String[] BODY_PATTERNS = {
+            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
+            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT and ADJECTIVE SUBJECT.",
+            "PRONOUN VERB ADJECTIVE SUBJECT."
+    };
 
     @Override
     public List<News> getNews() {
@@ -35,22 +37,19 @@ public class NewsGenerator implements NewsReader {
     }
 
     private String makeNewsTitle() {
-        int randomPattern = new Random().nextInt(titlePatterns.size());
-        String sentencePattern = titlePatterns.get(randomPattern);
-        return makeSentences(sentencePattern, 1);
+        return makeSentences(TITLE_PATTERNS, 1);
     }
 
     private String makeNewsBody() {
-        System.out.println(bodyPatterns.size());
-        int randomPattern = new Random().nextInt(bodyPatterns.size());
-        String sentencePattern = bodyPatterns.get(randomPattern);
-        return makeSentences(sentencePattern, 5);
+        return makeSentences(BODY_PATTERNS, 5);
     }
 
-    private String makeSentences(String sentencePattern, int count) {
+    private String makeSentences(String[] sentencePatterns, int count) {
         StringBuilder textBuilder = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            String sentence = transformPattern(sentencePattern);
+            int randomPattern = new Random().nextInt(sentencePatterns.length);
+            String pattern = sentencePatterns[randomPattern];
+            String sentence = transformPattern(pattern);
             textBuilder.append(sentence.substring(0, 1).toUpperCase() + sentence.substring(1) + " ");
         }
         return textBuilder.toString();
@@ -60,19 +59,8 @@ public class NewsGenerator implements NewsReader {
         String sentence = sentencePattern;
         for(SentenceElement sentenceElement : SentenceElement.values()) {
             SentenceElementStorage elementStorage = new SentenceElementStorage(sentenceElement.getFileName());
-            String regex = sentenceElement.name() + "\\(\\d*\\)";
-            Pattern regexPattern = Pattern.compile(regex);
-            Matcher matcher = regexPattern.matcher(sentence);
-            while (matcher.find()) {
-                String partToReplace = matcher.group();
-                String partFrequency = partToReplace.substring(partToReplace.indexOf("(") + 1, partToReplace.indexOf(")"));
-                int frequency = Integer.parseInt(partFrequency);
-                if(Math.random() * 100 < frequency) {
-                    sentence = sentence.replaceFirst(regex, elementStorage.getRandomElement());
-                }
-                else {
-                    sentence = sentence.replaceFirst(regex + " ", "");
-                }
+            while (sentence.indexOf(sentenceElement.name()) >= 0) {
+                sentence = sentence.replaceFirst(sentenceElement.name(), elementStorage.getRandomElement());
             }
         }
         return sentence;

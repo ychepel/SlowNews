@@ -1,14 +1,19 @@
 package com.univer.slownews.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
 public class User {
     private String name;
     private String password;
     private String email;
 
     public User(String name, String email, String password) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
+        setName(name);
+        setPassword(password);
+        setEmail(email);
     }
 
     public User() {}
@@ -26,7 +31,17 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        MessageDigest messageDigest = null;
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(password.getBytes("UTF-8"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        this.password = Arrays.toString(messageDigest.digest());
+        System.out.println(this.password);
     }
 
     public String getEmail() {

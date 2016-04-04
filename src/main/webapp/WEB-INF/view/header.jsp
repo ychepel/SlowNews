@@ -7,6 +7,8 @@
         <c:if test="${title == null}">Slow News</c:if>
     </title>
     <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="/js/main.js"></script>
 </head>
 <body>
 <div class="header">
@@ -14,17 +16,18 @@
         <a href="."><img src="images/logo.png"></a>
     </div>
     <div class="welcome">
-        <c:if test="${sessionScope.username != null}">Welcome, ${sessionScope.username} !</c:if>
+        <c:if test="${sessionScope.username == null}">Hello, Guest !</c:if>
+        <c:if test="${sessionScope.username != null}">Hello, ${sessionScope.username} !</c:if>
     </div>
     <nav class="menu">
         <ul class="list-menu">
-            <li class="menu-item"><a class="header-link" href="/news">all</a></li>
-            <li class="menu-item"><a class="header-link" href="/archive">archive</a></li>
             <c:if test="${sessionScope.username == null}">
                 <li class="menu-item"><a class="header-link" href="/login">log in</a></li>
                 <li class="menu-item"><a class="header-link" href="/signup">sign up</a></li>
             </c:if>
             <c:if test="${sessionScope.username != null}">
+                <li class="menu-item"><a class="header-link" href="/news">all</a></li>
+                <li class="menu-item"><a class="header-link" href="/archive">archive</a></li>
                 <li class="menu-item"><a class="header-link" href="/logout">log out</a></li>
             </c:if>
         </ul>

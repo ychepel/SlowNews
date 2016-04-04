@@ -4,7 +4,7 @@ British
 American
 Russian
 Turkish
-Sirian
+Syrian
 huge
 cheap
 expensive
@@ -26,3 +26,5 @@ creative
 honest
 last
 tiny
+dramatic
+dangerous

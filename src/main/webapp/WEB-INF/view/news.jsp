@@ -2,9 +2,18 @@
 
 <c:import url="header.jsp"/>
 
-<form class="content" action="/save" method="post">
+<form id="news-form" action="/news" method="post">
+    <div class="news-archive-buttons noshow">
+        <div class="logo">
+            <a href="."><img src="images/logo.png"></a>
+        </div>
+        <ul class="list-menu">
+            <li class="menu-item"><a class="save-selected">save</a></li>
+            <li class="menu-item"><a class="cancel-saving">cancel</a></li>
+        </ul>
+    </div>
     <ul class="news-list">
-        <c:forEach items="${news}" var="newsItem">
+        <c:forEach items="${news}" var="newsItem" varStatus="newsItemStatus">
             <li class="list-item">
                 <div class="item-content">
                     <img class="teaser-image" src="${newsItem.teaserLink}">
@@ -15,11 +24,12 @@
                             <c:if test='${newsItem.url != ""}'>
                                 <li><a href="${newsItem.url}" class="news-link" target="_blank">read</a></li>
                             </c:if>
-                            <label class="massive-checkbox">
-                                <input type="checkbox" name="0">
-                                <span></span>
-                            </label>
-                            <li><a href="#" class="news-link">add to archive</a></li>
+                            <c:if test="${sessionScope.username != null}">
+                                <li>
+                                    <a class="news-link">add to archive</a>
+                                    <input class="archive-checkbox noshow" type="checkbox" name="${newsItemStatus.index}">
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
