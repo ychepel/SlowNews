@@ -150,7 +150,7 @@ nav.menu {
     margin: 0 auto;
 }
 
-.signup-form ul {
+.signup-list {
     padding: 0;
 }
 
@@ -160,7 +160,7 @@ nav.menu {
     position: relative;
 }
 
-.form-field input {
+.form-input {
     border-radius: 4px;
     font-size: inherit;
     width: 100%;
@@ -169,7 +169,7 @@ nav.menu {
     text-indent: 0.5em;
 }
 
-.form-field button {
+.form-button {
     height: 40px;
     line-height: 40px;
     border: 1px solid #414858;
@@ -183,7 +183,7 @@ nav.menu {
     cursor: pointer;
 }
 
-.form-field button:hover {
+.form-button:hover {
     background-color: #288cfb;
 }
 
@@ -193,10 +193,6 @@ nav.menu {
     color: #198627;
     font-weight: bold;
     font-size: 120%;
-}
-
-.message a {
-    color: #224A27;
 }
 
 .error-message {
@@ -211,7 +207,7 @@ nav.menu {
     margin: 20px;
 }
 
-.user-list th,.user-list td {
+.user-list-head, .user-list-body {
     border: 1px solid gray;
     padding: 5px;
 }
@@ -230,7 +226,7 @@ nav.menu {
     z-index: 5;
 }
 
-.news-archive-buttons .list-menu {
+.archive-list-menu {
     float: right;
 }
 

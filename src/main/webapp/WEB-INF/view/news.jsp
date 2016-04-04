@@ -7,7 +7,7 @@
         <div class="logo">
             <a href="."><img src="images/logo.png"></a>
         </div>
-        <ul class="list-menu">
+        <ul class="archive-list-menu">
             <li class="menu-item"><a class="save-selected">save</a></li>
             <li class="menu-item"><a class="cancel-saving">cancel</a></li>
         </ul>

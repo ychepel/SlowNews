@@ -5,16 +5,16 @@
     <h3>List of users:</h3>
     <table>
         <thead>
-            <th>User Name</th>
-            <th>Email</th>
-            <th>Password</th>
+            <th class="user-list-head">User Name</th>
+            <th class="user-list-head">Email</th>
+            <th class="user-list-head">Password</th>
         </thead>
         <tbody>
         <c:forEach var="user" items="${users}">
                 <tr>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>${user.password}</td>
+                    <td class="user-list-body">${user.name}</td>
+                    <td class="user-list-body">${user.email}</td>
+                    <td class="user-list-body">${user.password}</td>
                 </tr>
         </c:forEach>
         </tbody>
