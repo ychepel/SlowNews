@@ -1,22 +1,42 @@
 make
-made
-is
-was
-got
-came to
-afraid of
-think about
-killed
-was killed by
-seduced a
-seduced by
-has
+be
+get
 come
-wasted
+afraid
+think
+kill
+seduce
+has
+waste
 need
-know about
-learned
-have
-fight
+know
+produce
+learn
 put
-told about
+tell
+sleep
+deport
+die
+get married
+report
+push
+win
+say
+discover
+arrest
+destroy
+brake
+keep
+program
+invent
+chase
+arrest
+start
+begin
+eject
+place
+serve
+sell
+bring
+go
+eat

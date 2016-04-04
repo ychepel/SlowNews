@@ -9,15 +9,18 @@ import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
     private List<News> news;
-    private static final String[] TITLE_PATTERNS = {
+    private static final String[] SENTENCE_PATTERNS = {
             "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
             "VERB ADJECTIVE SUBJECT!",
-            "SUBJECT: SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT."
-    };
-    private static final String[] BODY_PATTERNS = {
-            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
-            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT and ADJECTIVE SUBJECT.",
-            "PRONOUN VERB ADJECTIVE SUBJECT."
+            "SUBJECT: SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
+            "ADJECTIVE SUBJECT PAST PREPOSITION ADJECTIVE SUBJECT and ADJECTIVE SUBJECT.",
+            "PRONOUN PAST ADJECTIVE SUBJECT.",
+            "SUBJECT VERB to VERB ADJECTIVE SUBJECT.",
+            "ADJECTIVE SUBJECT MODAL VERB PREPOSITION ADJECTIVE SUBJECT.",
+            "SUBJECT was PAST PREPOSITION ADJECTIVE SUBJECT.",
+            "SUBJECT PAST, but SUBJECT PAST.",
+            "QUESTION SUBJECT VERB SUBJECT?",
+            "SUBJECT PAST SUBJECT PREPOSITION SUBJECT."
     };
 
     @Override
@@ -37,18 +40,18 @@ public class NewsGenerator implements NewsReader {
     }
 
     private String makeNewsTitle() {
-        return makeSentences(TITLE_PATTERNS, 1);
+        return makeSentences(1);
     }
 
     private String makeNewsBody() {
-        return makeSentences(BODY_PATTERNS, 5);
+        return makeSentences(5);
     }
 
-    private String makeSentences(String[] sentencePatterns, int count) {
+    private String makeSentences(int count) {
         StringBuilder textBuilder = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            int randomPattern = new Random().nextInt(sentencePatterns.length);
-            String pattern = sentencePatterns[randomPattern];
+            int randomPattern = new Random().nextInt(SENTENCE_PATTERNS.length);
+            String pattern = SENTENCE_PATTERNS[randomPattern];
             String sentence = transformPattern(pattern);
             textBuilder.append(sentence.substring(0, 1).toUpperCase() + sentence.substring(1) + " ");
         }

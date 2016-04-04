@@ -40,8 +40,7 @@ public class User {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        this.password = Arrays.toString(messageDigest.digest());
-        System.out.println(this.password);
+        this.password = new String(messageDigest.digest());
     }
 
     public String getEmail() {
