@@ -1,14 +1,15 @@
-package com.univer.slownews.model;
+package com.univer.slownews.service;
 
-import javax.lang.model.element.NestingKind;
+import com.univer.slownews.model.News;
+import com.univer.slownews.model.SentenceElement;
+import com.univer.slownews.model.SentenceElementStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class NewsGenerator implements NewsReader {
-    private List<News> news;
+
     private static final String[] SENTENCE_PATTERNS = {
             "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
             "VERB ADJECTIVE SUBJECT!",
@@ -25,11 +26,11 @@ public class NewsGenerator implements NewsReader {
 
     @Override
     public List<News> getNews() {
-        makeFakeNews(10);
-        return news;
+        return makeFakeNews(10);
     }
 
-    public void makeFakeNews(int count) {
+    public List<News> makeFakeNews(int count) {
+        List<News> news = new ArrayList<>();
         for(int i = 0; i < count ; i++) {
             String title = makeNewsTitle();
             String body = makeNewsBody();
@@ -37,6 +38,7 @@ public class NewsGenerator implements NewsReader {
             News fakeNews = new News(title, body, imageUrl, "");
             news.add(fakeNews);
         }
+        return news;
     }
 
     private String makeNewsTitle() {
@@ -67,9 +69,5 @@ public class NewsGenerator implements NewsReader {
             }
         }
         return sentence;
-    }
-
-    public NewsGenerator() {
-        news = new ArrayList<>();
     }
 }

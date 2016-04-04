@@ -1,6 +1,9 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.*;
+import com.univer.slownews.service.NewsGenerator;
+import com.univer.slownews.service.NewsReader;
+import com.univer.slownews.model.NewsStorage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -1,5 +1,6 @@
-package com.univer.slownews.model;
+package com.univer.slownews.service;
 
+import com.univer.slownews.model.News;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
