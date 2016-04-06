@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class NewsGenerator implements NewsReader {
+public class NewsGenerator implements NewsProvider {
 
     private static final String[] SENTENCE_PATTERNS = {
             "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
@@ -34,7 +34,7 @@ public class NewsGenerator implements NewsReader {
         for(int i = 0; i < count ; i++) {
             String title = makeNewsTitle();
             String body = makeNewsBody();
-            String imageUrl = "http://lorempixel.com/400/200?random=" + i;
+            String imageUrl = ""; /*http://lorempixel.com/400/200?random=" + i*/
             News fakeNews = new News(title, body, imageUrl, "");
             news.add(fakeNews);
         }

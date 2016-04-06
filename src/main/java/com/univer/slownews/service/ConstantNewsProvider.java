@@ -5,7 +5,7 @@ import com.univer.slownews.model.News;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConstantNewsReader implements NewsReader {
+public class ConstantNewsProvider implements NewsProvider {
 
     public List<News> getNews() {
         List<News> news = new ArrayList<>();

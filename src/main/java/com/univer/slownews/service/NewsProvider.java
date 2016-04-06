@@ -4,6 +4,6 @@ import com.univer.slownews.model.News;
 
 import java.util.List;
 
-public interface NewsReader {
+public interface NewsProvider {
     public List<News> getNews();
 }

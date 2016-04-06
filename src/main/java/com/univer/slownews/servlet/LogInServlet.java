@@ -33,12 +33,11 @@ public class LogInServlet extends HttpServlet {
         if(storage.contains(user)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-            request.setAttribute("message", "You are logged successfully!");
+            response.sendRedirect("/news");
         }
         else {
             request.setAttribute("error_message", "Wrong information. Please try again.");
+            doGet(request, response);
         }
-
-        doGet(request, response);
     }
 }
