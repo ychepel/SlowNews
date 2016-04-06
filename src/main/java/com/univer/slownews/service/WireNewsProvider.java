@@ -16,8 +16,8 @@ public class WireNewsProvider {
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target("http://newswire.net").path("rssfeeds/channel/feed/rss/newsroom");
-        News jsonAnswer = target.request(MediaType.APPLICATION_XML_TYPE).get(News.class);
-        news.add(jsonAnswer);
+        News currentNews = target.request(MediaType.APPLICATION_XML).get(News.class);
+        news.add(currentNews);
 
         return news;
     }

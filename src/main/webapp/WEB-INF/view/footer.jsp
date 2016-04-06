@@ -1,5 +1,5 @@
 <div class="footer">
-    <b>SlowNews</b> © All rights reserved.
+    <b>SlowNews</b> &#169; All rights reserved.
     <div class="weather">${weather}</div>
 </div>
 </body>

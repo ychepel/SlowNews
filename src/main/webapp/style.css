@@ -228,6 +228,7 @@ nav.menu {
 
 .archive-list-menu {
     float: right;
+    margin: 0;
 }
 
 .save-selected, .cancel-saving {

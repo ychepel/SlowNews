@@ -1,9 +1,22 @@
 package com.univer.slownews.model;
 
+import org.eclipse.persistence.oxm.annotations.XmlPath;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class News {
+    @XmlElement(name="title")
     private String title;
+
+    @XmlElement(name="description")
     private String body;
+
+    @XmlElement(name="enclosure")
     private String teaserLink;
+
+    @XmlElement(name="link")
     private String url;
 
     public News() {

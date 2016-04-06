@@ -1,6 +1,7 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.*;
+import com.univer.slownews.service.ConstantNewsProvider;
 import com.univer.slownews.service.NewsGenerator;
 import com.univer.slownews.service.NewsProvider;
 import com.univer.slownews.model.NewsStorage;
@@ -18,7 +19,7 @@ import java.util.*;
 @WebServlet("/news")
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        NewsProvider newsReader = new NewsGenerator();
+        NewsProvider newsReader = new ConstantNewsProvider();
         List<News> showNews = newsReader.getNews();
         request.setAttribute("news", showNews);
 
