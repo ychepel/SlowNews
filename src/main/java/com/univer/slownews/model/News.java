@@ -5,18 +5,18 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name="rss")
 public class News {
-    @XmlElement(name="title")
+    @XmlPath("channel/title")
     private String title;
 
-    @XmlElement(name="description")
+    @XmlPath("channel/description")
     private String body;
 
-    @XmlElement(name="enclosure")
+    @XmlPath("channel/enclosure")
     private String teaserLink;
 
-    @XmlElement(name="link")
+    @XmlPath("channel/link")
     private String url;
 
     public News() {
@@ -29,34 +29,34 @@ public class News {
         this.url = url;
     }
 
+    @XmlElement
+    public String getTitle() {
+        return title;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
 
+    @XmlElement
+    public String getBody() {
+        return body;
+    }
     public void setBody(String body) {
         this.body = body;
     }
 
+    @XmlElement
+    public String getTeaserLink() {
+        return teaserLink;
+    }
     public void setTeaserLink(String teaserLink) {
         this.teaserLink = teaserLink;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public String getTeaserLink() {
-        return teaserLink;
-    }
-
+    @XmlElement
     public String getUrl() {
         return url;
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
