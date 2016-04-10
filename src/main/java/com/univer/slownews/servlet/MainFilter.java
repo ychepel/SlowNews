@@ -17,10 +17,9 @@ public class MainFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ServletContext context = servletRequest.getServletContext();
         if(weatherNeedUpdate(context.getAttribute("weatherUpdateTime"))) {
-            servletRequest.setAttribute("weather", new WeatherProvider().getWeather());
+            context.setAttribute("weather", new WeatherProvider().getWeather());
             context.setAttribute("weatherUpdateTime", System.currentTimeMillis());
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

@@ -18,4 +18,8 @@ $(function() {
     $("a.save-selected").click(function() {
         $("#news-form").submit();
     });
+
+    $(function() {
+        $('nav a[href="/' + location.pathname.split("/")[1] + location.search + '"]').addClass('active');
+    });
 });

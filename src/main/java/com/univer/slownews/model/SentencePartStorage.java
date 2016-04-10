@@ -6,18 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SentenceElementStorage {
+public class SentencePartStorage {
     private String fileName;
     private List<String> lines;
 
-    public SentenceElementStorage(String fileName) {
+    public SentencePartStorage(String fileName) {
         this.fileName = fileName;
         readFromFile();
     }
 
     private void readFromFile() {
         lines = new ArrayList<>();
-
 
         try (BufferedReader fileBuffer = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));) {
             while (fileBuffer.ready()) {

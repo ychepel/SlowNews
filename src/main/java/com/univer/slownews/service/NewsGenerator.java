@@ -1,28 +1,30 @@
 package com.univer.slownews.service;
 
-import com.univer.slownews.model.News;
-import com.univer.slownews.model.SentenceElement;
-import com.univer.slownews.model.SentenceElementStorage;
+import com.univer.slownews.model.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static com.univer.slownews.model.SentenceInsertion.*;
+import static com.univer.slownews.model.SentencePart.*;
+
 public class NewsGenerator implements NewsProvider {
 
-    private static final String[] SENTENCE_PATTERNS = {
-            "ADJECTIVE SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
-            "VERB ADJECTIVE SUBJECT!",
-            "SUBJECT: SUBJECT VERB PREPOSITION ADJECTIVE SUBJECT.",
-            "ADJECTIVE SUBJECT PAST PREPOSITION ADJECTIVE SUBJECT and ADJECTIVE SUBJECT.",
-            "PRONOUN PAST ADJECTIVE SUBJECT.",
-            "SUBJECT VERB to VERB ADJECTIVE SUBJECT.",
-            "ADJECTIVE SUBJECT MODAL VERB PREPOSITION ADJECTIVE SUBJECT.",
-            "SUBJECT was PAST PREPOSITION ADJECTIVE SUBJECT.",
-            "SUBJECT PAST, but SUBJECT PAST.",
-            "QUESTION SUBJECT VERB SUBJECT?",
-            "SUBJECT PAST SUBJECT PREPOSITION SUBJECT."
-    };
+    private static final List<List<SentenceElement>> SENTENCE_PATTERNS = new ArrayList(){{
+        add(Arrays.asList(ADJECTIVE, SUBJECT, VERB, PREPOSITION, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(VERB, ADJECTIVE, SUBJECT, EXCLAMATION));
+        add(Arrays.asList(SUBJECT, COLON, SUBJECT, VERB, PREPOSITION, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(ADJECTIVE, SUBJECT, PAST, PREPOSITION, ADJECTIVE, SUBJECT, WORD_AND, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(PRONOUN, PAST, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(SUBJECT, VERB, WORD_TO, VERB, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(ADJECTIVE, SUBJECT, MODAL, VERB, PREPOSITION, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(SUBJECT, WORD_WAS, PAST, PREPOSITION, ADJECTIVE, SUBJECT, POINT));
+        add(Arrays.asList(SUBJECT, PAST, COMMA, WORD_BUT, SUBJECT, PAST, POINT));
+        add(Arrays.asList(QUESTION, SUBJECT, VERB, SUBJECT, QUESTION_MARK));;
+        add(Arrays.asList(SUBJECT, PAST, SUBJECT, PREPOSITION, SUBJECT, POINT));
+    }};
 
     @Override
     public List<News> getNews() {
@@ -34,7 +36,7 @@ public class NewsGenerator implements NewsProvider {
         for(int i = 0; i < count ; i++) {
             String title = makeNewsTitle();
             String body = makeNewsBody();
-            String imageUrl = ""; /*http://lorempixel.com/400/200?random=" + i*/
+            String imageUrl = "http://lorempixel.com/400/200?random=" + i;
             News fakeNews = new News(title, body, imageUrl, "");
             news.add(fakeNews);
         }
@@ -52,22 +54,24 @@ public class NewsGenerator implements NewsProvider {
     private String makeSentences(int count) {
         StringBuilder textBuilder = new StringBuilder();
         for (int i = 0; i < count; i++) {
-            int randomPattern = new Random().nextInt(SENTENCE_PATTERNS.length);
-            String pattern = SENTENCE_PATTERNS[randomPattern];
-            String sentence = transformPattern(pattern);
-            textBuilder.append(sentence.substring(0, 1).toUpperCase() + sentence.substring(1) + " ");
+            int randomPattern = new Random().nextInt(SENTENCE_PATTERNS.size());
+            List<SentenceElement> pattern = SENTENCE_PATTERNS.get(randomPattern);
+            textBuilder.append(transformPattern(pattern) + " ");
         }
         return textBuilder.toString();
     }
 
-    private String transformPattern(String sentencePattern) {
-        String sentence = sentencePattern;
-        for(SentenceElement sentenceElement : SentenceElement.values()) {
-            SentenceElementStorage elementStorage = new SentenceElementStorage(sentenceElement.getFileName());
-            while (sentence.indexOf(sentenceElement.name()) >= 0) {
-                sentence = sentence.replaceFirst(sentenceElement.name(), elementStorage.getRandomElement());
-            }
+    private String transformPattern(List<SentenceElement> pattern) {
+        StringBuilder builder = new StringBuilder();
+        for(SentenceElement element : pattern) {
+            builder.append(element.getElementValue());
         }
-        return sentence;
+        return clearingSentence(builder.toString());
+    }
+
+    private String clearingSentence(String sentence) {
+        String clear = sentence.substring(1, 2).toUpperCase() + sentence.substring(2);
+        clear.replace("  ", " ");
+        return clear;
     }
 }

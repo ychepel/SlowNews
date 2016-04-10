@@ -54,6 +54,10 @@ nav.menu {
     padding: 16px;
 }
 
+.header-link.active {
+    background-color: #61844A;
+}
+
 .menu .menu-item a:hover {
     background-color: #111;
 }

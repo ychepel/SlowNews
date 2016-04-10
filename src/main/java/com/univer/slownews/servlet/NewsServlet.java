@@ -5,6 +5,7 @@ import com.univer.slownews.service.ConstantNewsProvider;
 import com.univer.slownews.service.NewsGenerator;
 import com.univer.slownews.service.NewsProvider;
 import com.univer.slownews.model.NewsStorage;
+import com.univer.slownews.service.WireNewsProvider;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +20,13 @@ import java.util.*;
 @WebServlet("/news")
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        NewsProvider newsReader = new ConstantNewsProvider();
+        NewsProvider newsReader;
+        if(request.getParameterMap().containsKey("fake")) {
+            newsReader = new NewsGenerator();
+        }
+        else {
+            newsReader = new WireNewsProvider();
+        }
         List<News> showNews = newsReader.getNews();
         request.setAttribute("news", showNews);
 

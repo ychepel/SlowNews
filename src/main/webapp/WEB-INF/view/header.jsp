@@ -21,13 +21,14 @@
     </div>
     <nav class="menu">
         <ul class="list-menu">
+            <li class="menu-item"><a class="header-link" href="/news">real news</a></li>
+            <li class="menu-item"><a class="header-link" href="/news?fake">fake news</a></li>
             <c:if test="${sessionScope.username == null}">
                 <li class="menu-item"><a class="header-link" href="/login">log in</a></li>
                 <li class="menu-item"><a class="header-link" href="/signup">sign up</a></li>
             </c:if>
             <c:if test="${sessionScope.username != null}">
-                <li class="menu-item"><a class="header-link" href="/news">all</a></li>
-                <li class="menu-item"><a class="header-link" href="/archive">archive</a></li>
+                <li class="menu-item"><a class="header-link" href="/archive">archive</a></li> <%--${pageContext.request.requestURI eq '/WEB-INF/view/archive.jsp' ? ' active' : ''}--%>
                 <li class="menu-item"><a class="header-link" href="/logout">log out</a></li>
             </c:if>
         </ul>
