@@ -19,7 +19,9 @@ $(function() {
         $("#news-form").submit();
     });
 
-    $(function() {
-        $('nav a[href="/' + location.pathname.split("/")[1] + location.search + '"]').addClass('active');
+    $("a.header-link").click(function(event) {
+        event.preventDefault();
+        window.history.pushState("object or string", "Title", $(this).attr('href'));
     });
+
 });

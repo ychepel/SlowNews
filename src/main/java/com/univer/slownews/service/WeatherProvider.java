@@ -15,7 +15,7 @@ public class WeatherProvider {
         WebTarget target = client.target("https://api.forecast.io").path("forecast/ccc9e70f9fbe7b36c2ceea0201205811/50.450100,30.523400");
         String jsonAnswer = target.request(MediaType.APPLICATION_JSON_TYPE).get(String.class);
         JSONObject currentWeather = new JSONObject(jsonAnswer).getJSONObject("currently");
-        weather = "Weather in Kiev: " + currentWeather.getString("summary") + ", " + currentWeather.getDouble("temperature") + " \u00b0F";
+        weather = "Weather in Kiev: " + currentWeather.getString("summary") + ", " + currentWeather.getDouble("temperature") + " F";
         return weather;
     }
 }
