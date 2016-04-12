@@ -18,12 +18,12 @@ public class MainFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ServletContext context = servletRequest.getServletContext();
-        if(weatherNeedUpdate(context.getAttribute("weatherUpdateTime"))) {
+        if (weatherNeedUpdate(context.getAttribute("weatherUpdateTime"))) {
             context.setAttribute("weather", new WeatherProvider().getWeather());
             context.setAttribute("weatherUpdateTime", System.currentTimeMillis());
         }
 
-        servletRequest.setAttribute("uri", ((HttpServletRequest)servletRequest).getRequestURI());
+        servletRequest.setAttribute("uri", ((HttpServletRequest) servletRequest).getRequestURI());
 
         filterChain.doFilter(servletRequest, servletResponse);
     }
@@ -34,10 +34,10 @@ public class MainFilter implements Filter {
     }
 
     private boolean weatherNeedUpdate(Object lastTime) {
-        if(lastTime == null) {
+        if (lastTime == null) {
             return true;
         }
-        if(System.currentTimeMillis() - (Long)lastTime > 10*60*1000) {
+        if (System.currentTimeMillis() - (Long) lastTime > 10 * 60 * 1000) {
             return true;
         }
         return false;

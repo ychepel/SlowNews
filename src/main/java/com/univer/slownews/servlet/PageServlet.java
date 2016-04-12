@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("")
 public class PageServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/page.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/news");
         dispatcher.forward(request, response);
     }
 }

@@ -19,7 +19,7 @@ $(function() {
         $("#news-form").submit();
     });
 
-    $.get("/news", function(data) {
+    $.get("/content/news", function(data) {
         $("#content").html(data);
     });
 
@@ -27,7 +27,7 @@ $(function() {
         event.preventDefault();
         window.history.pushState("object or string", "Title", $(this).attr('href'));
 
-        $.get($(this).attr('href'), function(data) {
+        $.get("/content" + $(this).attr('href'), function(data) {
             $("#content").html(data);
         });
     });

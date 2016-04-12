@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="header.jsp"/>
+<c:import url="/WEB-INF/view/header.jsp"/>
 
-<div id="content"></div>
+<div id="content">loading...</div>
 
-<c:import url="footer.jsp"/>
+<c:import url="/WEB-INF/view/footer.jsp"/>
