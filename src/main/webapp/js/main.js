@@ -5,7 +5,7 @@ $(function() {
         $(".news-archive-buttons").toggleClass("noshow");
     }
 
-    $(".news-link").click(function() {
+    $("a.news-link").click(function() {
         toggleClasses();
         $(this).parent().children("input.archive-checkbox").prop("checked", true);
     });
@@ -19,9 +19,36 @@ $(function() {
         $("#news-form").submit();
     });
 
+    $.get("/news", function(data) {
+        $("#content").html(data);
+    });
+
     $("a.header-link").click(function(event) {
         event.preventDefault();
         window.history.pushState("object or string", "Title", $(this).attr('href'));
+
+        $.get($(this).attr('href'), function(data) {
+            $("#content").html(data);
+        });
+    });
+
+    $(document).ready(function() {
+        var audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', 'media/music.mp3');
+        audioElement.setAttribute('autoplay', 'autoplay');
+        $.get();
+        audioElement.addEventListener("load", function () {
+            audioElement.play();
+        }, true);
+
+        $('#play-music').click(function() {
+            audioElement.play();
+        });
+
+
+        $('#pause-music').click(function() {
+            audioElement.pause();
+        });
     });
 
 });

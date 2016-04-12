@@ -17,11 +17,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
-@WebServlet("/news")
+@WebServlet({"/news", "/fakenews"})
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         NewsProvider newsReader;
-        if(request.getParameterMap().containsKey("fake")) {
+        if("/fakenews".equals(request.getRequestURI())) {
             newsReader = new NewsGenerator();
         }
         else {

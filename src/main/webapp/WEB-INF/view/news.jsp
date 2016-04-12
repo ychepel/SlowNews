@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:import url="header.jsp"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form id="news-form" action="/news" method="post">
     <div class="news-archive-buttons noshow">
@@ -37,5 +36,3 @@
         </c:forEach>
     </ul>
 </form>
-
-<c:import url="footer.jsp"/>

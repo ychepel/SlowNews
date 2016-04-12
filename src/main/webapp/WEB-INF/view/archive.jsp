@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:import url="header.jsp"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="content">
     <ul class="news-list">
@@ -22,5 +21,3 @@
         </c:forEach>
     </ul>
 </div>
-
-<c:import url="footer.jsp"/>

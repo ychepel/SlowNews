@@ -1,6 +1,5 @@
 window.onload = function() {
     var req = new XMLHttpRequest();
-    var params = "object=World";
     req.open('GET', 'weather', true);
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {

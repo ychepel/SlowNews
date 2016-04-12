@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:import url="header.jsp"/>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <div class="user-form">
     <form class="signup-form" action="signup" method="post">
@@ -12,5 +11,3 @@
         </ul>
     </form>
     </div>
-
-<c:import url="footer.jsp"/>

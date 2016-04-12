@@ -4,6 +4,8 @@ import com.univer.slownews.service.WeatherProvider;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebFilter("/*")
@@ -20,6 +22,9 @@ public class MainFilter implements Filter {
             context.setAttribute("weather", new WeatherProvider().getWeather());
             context.setAttribute("weatherUpdateTime", System.currentTimeMillis());
         }
+
+        servletRequest.setAttribute("uri", ((HttpServletRequest)servletRequest).getRequestURI());
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

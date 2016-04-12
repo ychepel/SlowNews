@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:import url="header.jsp"/>
 <div class="user-list">
     <h3>List of users:</h3>
     <table>
@@ -20,4 +20,3 @@
         </tbody>
     </table>
 </div>
-<c:import url="footer.jsp"/>
