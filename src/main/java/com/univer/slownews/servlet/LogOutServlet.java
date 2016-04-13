@@ -15,7 +15,7 @@ public class LogOutServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.invalidate();
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/news");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/content/news");
         dispatcher.forward(request, response);
     }
 }

@@ -10,23 +10,18 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>PageServlet</servlet-name>
-        <servlet-class>com.univer.slownews.servlet.PageServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>PageServlet</servlet-name>
-        <url-pattern>/notworking</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
         <servlet-name>MainPage</servlet-name>
-        <jsp-file>/WEB-INF/view/page.jsp</jsp-file>
+        <servlet-class>com.univer.slownews.servlet.PageServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
         <servlet-name>MainPage</servlet-name>
         <url-pattern>/news</url-pattern>
+        <url-pattern>/fakenews</url-pattern>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/signup</url-pattern>
+        <url-pattern>/archive</url-pattern>
     </servlet-mapping>
 
 

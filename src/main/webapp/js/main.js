@@ -5,29 +5,68 @@ $(function() {
         $(".news-archive-buttons").toggleClass("noshow");
     }
 
-    $("a.news-link").click(function() {
+    $(document).on("click", "a.news-link", function(){
         toggleClasses();
         $(this).parent().children("input.archive-checkbox").prop("checked", true);
     });
 
-    $("a.cancel-saving").click(function() {
+    $(document).on("click", "a.cancel-saving", function(){
         toggleClasses();
         $("input.archive-checkbox").prop("checked", false);
     });
 
-    $("a.save-selected").click(function() {
-        $("#news-form").submit();
-    });
-
-    $.get("/content/news", function(data) {
-        $("#content").html(data);
-    });
-
-    $("a.header-link").click(function(event) {
+    $(document).on("click", "a.save-selected", function(){
         event.preventDefault();
-        window.history.pushState("object or string", "Title", $(this).attr('href'));
+        var formData = "";
+
+        $(":checked").each(function() {
+            formData += $(this).val() + "&"
+        });
+
+        $.post("/content" + window.location.pathname, formData, function(data) {
+            $("#content").html(data);
+        });
+    });
+
+    $(document).ready(function() {
+        $.get("/content" + window.location.pathname, function(data) {
+            $("#content").html(data);
+        });
+    });
+
+    $(document).on("click", "a.header-link", function(event) {
+        event.preventDefault();
+        var currentHref = $(this).attr('href');
+        window.history.pushState("object or string", "Title", currentHref);
 
         $.get("/content" + $(this).attr('href'), function(data) {
+            $("#content").html(data);
+        });
+    });
+
+    $(document).on("submit", "#signup-form", function(event) {
+        event.preventDefault();
+
+        var formData = {
+            'username': $('input[name=username]').val(),
+            'email': $('input[name=email]').val(),
+            'password': $('input[name=password]').val()
+        };
+
+        $.post("/content/signup", formData, function(data) {
+            $("#content").html(data);
+        });
+    });
+
+    $(document).on("submit", "#login-form", function(event) {
+        event.preventDefault();
+
+        var formData = {
+            'username': $('input[name=username]').val(),
+            'password': $('input[name=password]').val()
+        };
+
+        $.post("/content/login", formData, function(data) {
             $("#content").html(data);
         });
     });
@@ -40,14 +79,20 @@ $(function() {
         audioElement.addEventListener("load", function () {
             audioElement.play();
         }, true);
+        audioElement.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
 
-        $('#play-music').click(function() {
-            audioElement.play();
-        });
-
-
-        $('#pause-music').click(function() {
-            audioElement.pause();
+        $("#music-mode").click(function() {
+            $(this).toggleClass("play");
+            $(this).toggleClass("pause");
+            if($(this).hasClass("play")) {
+                audioElement.pause();
+            }
+            else {
+                audioElement.play();
+            }
         });
     });
 

@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<c:import url="/WEB-INF/view/header.jsp"/>
+
 <div class="content">
     <ul class="news-list">
         <c:forEach items="${news}" var="newsItem" varStatus="newsItemStatus">

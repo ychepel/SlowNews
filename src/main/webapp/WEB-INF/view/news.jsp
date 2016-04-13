@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form id="news-form" action="/news" method="post">
+<c:import url="/WEB-INF/view/header.jsp"/>
+
+<form id="news-form">
     <div class="news-archive-buttons noshow">
         <div class="logo">
             <a href="."><img src="images/logo.png"></a>
@@ -26,7 +28,7 @@
                             <c:if test="${sessionScope.username != null}">
                                 <li>
                                     <a class="news-link">add to archive</a>
-                                    <input class="archive-checkbox noshow" type="checkbox" name="${newsItemStatus.index}">
+                                    <input class="archive-checkbox noshow" type="checkbox" name="news_id" value="${newsItemStatus.index}">
                                 </li>
                             </c:if>
                         </ul>

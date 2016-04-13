@@ -15,7 +15,6 @@ import java.io.IOException;
 @WebServlet("/content/login")
 public class LogInServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("title", "Log In - Slow News");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/view/login.jsp");
         dispatcher.forward(request, response);
     }

@@ -16,8 +16,6 @@ import java.util.List;
 @WebServlet("/content/archive")
 public class ArchiveServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("title", "Archive - Slow News");
-
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("username");
         NewsStorage newsStorage = NewsStorage.getInstance();

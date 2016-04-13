@@ -1,7 +1,6 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.*;
-import com.univer.slownews.service.ConstantNewsProvider;
 import com.univer.slownews.service.NewsGenerator;
 import com.univer.slownews.service.NewsProvider;
 import com.univer.slownews.model.NewsStorage;
@@ -21,7 +20,8 @@ import java.util.*;
 public class NewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         NewsProvider newsReader;
-        if("/fakenews".equals(request.getRequestURI())) {
+
+        if("/content/fakenews".equals(request.getRequestURI())) {
             newsReader = new NewsGenerator();
         }
         else {
@@ -44,7 +44,6 @@ public class NewsServlet extends HttpServlet {
 
         String userName = (String) session.getAttribute("username");
         NewsStorage newsStorage = NewsStorage.getInstance();
-
         for (String newsIndex : Collections.list(request.getParameterNames())) {
             int index = Integer.parseInt(newsIndex);
             newsStorage.addNews(userName, showNews.get(index));

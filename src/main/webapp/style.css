@@ -148,7 +148,7 @@ nav.menu {
     text-align: center;
 }
 
-.signup-form {
+.user-form {
     display: block;
     width: 300px;
     margin: 0 auto;
@@ -248,4 +248,31 @@ nav.menu {
 
 .save-selected:hover, .cancel-saving:hover {
     background-color: #25463b;
+}
+
+.music-control {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    cursor: pointer;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+.music-control.pause {
+    background: url("images/pause.png");
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+ }
+.music-control.play {
+    background: url("images/play.png");
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+}
+
+.loading {
+    width: 100%;
+    text-align: center;
+    height: 80%;
 }
