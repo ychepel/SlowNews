@@ -31,7 +31,7 @@ public class LogInServlet extends HttpServlet {
         if(storage.contains(user)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-            response.sendRedirect("/news");
+            response.sendRedirect("/content/news");
         }
         else {
             request.setAttribute("error_message", "Wrong information. Please try again.");

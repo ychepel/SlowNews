@@ -36,9 +36,8 @@ $(function() {
 
     $(document).on("click", "a.header-link", function(event) {
         event.preventDefault();
-        var currentHref = $(this).attr('href');
-        window.history.pushState("object or string", "Title", currentHref);
-
+        window.history.pushState("object or string", "Title", $(this).attr('href'));
+        $("#content").html("loading...");
         $.get("/content" + $(this).attr('href'), function(data) {
             $("#content").html(data);
         });

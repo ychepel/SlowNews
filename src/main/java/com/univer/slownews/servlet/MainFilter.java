@@ -17,7 +17,6 @@ public class MainFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletRequest.setAttribute("uri", ((HttpServletRequest) servletRequest).getRequestURI());
-        System.out.println(((HttpServletRequest) servletRequest).getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
