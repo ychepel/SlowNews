@@ -1,7 +1,9 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.User;
-import com.univer.slownews.model.UserStorage;
+import com.univer.slownews.service.PasswordEncryptionService;
+import com.univer.slownews.service.ServiceException;
+import com.univer.slownews.service.UserStorage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,21 +23,29 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = new User();
-        user.setName(username);
-        user.setPassword(password);
+        UserStorage storage = new UserStorage();
+        try {
+            String username = request.getParameter("username");
+            String originalPassword = request.getParameter("password");
+            String password = new PasswordEncryptionService().getEncryptedPassword(originalPassword);
+            User user = new User();
+            user.setName(username);
+            user.setPassword(password);
 
-        UserStorage storage = UserStorage.getInstance();
-        if(storage.contains(user)) {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("username", username);
-            response.sendRedirect("/content/news");
-        }
-        else {
-            request.setAttribute("error_message", "Wrong information. Please try again.");
+            if(storage.contains(user)) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("username", username);
+                response.sendRedirect("/content/news");
+            }
+            else {
+                request.setAttribute("error_message", "Wrong information. Please try again.");
+                doGet(request, response);
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            request.setAttribute("error_message", "Some problem with server. Please try again later.");
             doGet(request, response);
         }
+
     }
 }

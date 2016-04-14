@@ -1,10 +1,7 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.*;
-import com.univer.slownews.service.NewsGenerator;
-import com.univer.slownews.service.NewsProvider;
-import com.univer.slownews.model.NewsStorage;
-import com.univer.slownews.service.WireNewsProvider;
+import com.univer.slownews.service.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,10 +40,16 @@ public class NewsServlet extends HttpServlet {
         List<News> showNews = (List<News>) session.getAttribute("ShowNews");
 
         String userName = (String) session.getAttribute("username");
-        NewsStorage newsStorage = NewsStorage.getInstance();
+        NewsStorage newsStorage = new NewsStorage();
         for (String newsIndex : Collections.list(request.getParameterNames())) {
             int index = Integer.parseInt(newsIndex);
-            newsStorage.addNews(userName, showNews.get(index));
+            try {
+                newsStorage.addNews(userName, showNews.get(index));
+                System.out.println(showNews.get(index).getTitle());
+            } catch (ServiceException e) {
+                e.printStackTrace();
+                System.out.println(e);
+            }
         }
 
         doGet(request, response);

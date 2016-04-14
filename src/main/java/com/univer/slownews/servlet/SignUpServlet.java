@@ -1,7 +1,9 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.model.User;
-import com.univer.slownews.model.UserStorage;
+import com.univer.slownews.service.PasswordEncryptionService;
+import com.univer.slownews.service.ServiceException;
+import com.univer.slownews.service.UserStorage;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,22 +23,26 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserStorage storage = UserStorage.getInstance();
-
+        UserStorage storage = new UserStorage();
         String username = request.getParameter("username");
-        if(!storage.containsUserName(username)) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            User user = new User(username, email, password);
-            storage.addUser(user);
-            request.setAttribute("message", "New user have been added successfully.");
-            HttpSession session = request.getSession(true);
-            session.setAttribute("username", username);
+        try {
+            if(!storage.containsUserName(username)) {
+                String email = request.getParameter("email");
+                String originalPassword = request.getParameter("password");
+                String password = new PasswordEncryptionService().getEncryptedPassword(originalPassword);
+                User user = new User(username, email, password);
+                storage.addUser(user);
+                request.setAttribute("message", "New user have been added successfully.");
+                HttpSession session = request.getSession(true);
+                session.setAttribute("username", username);
+            }
+            else {
+                request.setAttribute("error_message", "There is already user with name `" + username + "`. Please choose another one.");
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            request.setAttribute("error_message", "Some problem with server. Please try again later.");
         }
-        else {
-            request.setAttribute("error_message", "There is already user with name `" + username + "`. Please choose another one.");
-        }
-
         doGet(request, response);
     }
 }
