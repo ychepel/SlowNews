@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsDao {
-    private DaoFactory daoFactory = new DaoFactory();
+    private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<News> getNewsByUser(String userName) throws DaoException {
         String sql = "SELECT N.* FROM \"NEWS\" N INNER JOIN \"USER\" U ON N.\"USER_ID\"=U.\"ID\" WHERE U.\"NAME\"=?";
         List<News> news = new ArrayList<>();
 
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {
             statement.setString(1, userName);
 
@@ -37,7 +37,7 @@ public class NewsDao {
         String sql = "INSERT INTO \"NEWS\" (\"USER_ID\", \"TITLE\", \"BODY\", \"TEASER_LINK\", \"SOURCE_LINK\") " +
                 "(SELECT \"ID\", ?, ?, ?, ? FROM \"USER\" WHERE \"NAME\"=?)";
 
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, news.getTitle());

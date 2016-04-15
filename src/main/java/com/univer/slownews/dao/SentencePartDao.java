@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SentencePartDao {
-    private DaoFactory daoFactory = new DaoFactory();
+    private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<String> getParts(String type) throws DaoException {
         String sql = "SELECT * FROM \"SENTENCE_PART\" WHERE \"TYPE\"=?;";
         List<String> parts = new ArrayList<>();
 
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {
             statement.setString(1, type);
 

@@ -2,19 +2,18 @@ package com.univer.slownews.dao;
 
 import com.univer.slownews.model.User;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
-    private DaoFactory daoFactory = new DaoFactory();
+    private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<User> getUsers() throws DaoException {
         String sql = "SELECT * FROM \"USER\"";
         List<User> users = new ArrayList<>();
 
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = connectionFactory.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql);) {
 
@@ -34,7 +33,7 @@ public class UserDao {
     public void addUser(User user) throws DaoException {
         String sql = "INSERT INTO \"USER\" (\"NAME\", \"PASSWORD\", \"EMAIL\") VALUES (?, ?, ?)";
 
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, user.getName());

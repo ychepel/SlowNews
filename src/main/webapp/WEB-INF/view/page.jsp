@@ -10,15 +10,6 @@
 </head>
 <body>
 
-<div id="content">
-    <div class="header">
-        <div class="logo">
-            <a id="logo-link" href="."><img src="images/logo.png"></a>
-        </div>
-    </div>
-    <div class="loading">
-        <img src="images/loading.gif">
-    </div>
-</div>
+<div id="content"></div>
 
 <c:import url="/WEB-INF/view/footer.jsp"/>

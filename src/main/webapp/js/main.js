@@ -34,10 +34,12 @@ $(function() {
         });
     });
 
+    $("#content").load("loading.html");
+
     $(document).on("click", "a.header-link", function(event) {
         event.preventDefault();
         window.history.pushState("object or string", "Title", $(this).attr('href'));
-        $("#content").html("loading...");
+        $("#content").load("loading.html");
         $.get("/content" + $(this).attr('href'), function(data) {
             $("#content").html(data);
         });
