@@ -10,6 +10,12 @@ body {
     width: 100%;
     display: inline-block;
     box-shadow: 0 3px 5px rgba(0,0,0,0.7);
+    position: fixed;
+    z-index: 5;
+}
+
+.main-content {
+    padding-top: 50px;
 }
 
 .logo {
@@ -193,7 +199,7 @@ nav.menu {
 
 .message {
     text-align: center;
-    margin: 20px;
+    padding-top: 70px;
     color: #198627;
     font-weight: bold;
     font-size: 120%;
@@ -201,7 +207,7 @@ nav.menu {
 
 .error-message {
     text-align: center;
-    margin: 20px;
+    padding-top: 70px;
     color: #d13029;
     font-weight: bold;
     font-size: 120%;
@@ -261,12 +267,12 @@ nav.menu {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 .music-control.pause {
-    background: url("images/pause.png");
+    background: url("images/play.png");
     background-repeat: no-repeat;
     background-size: 30px 30px;
  }
 .music-control.play {
-    background: url("images/play.png");
+    background: url("images/pause.png");
     background-repeat: no-repeat;
     background-size: 30px 30px;
 }

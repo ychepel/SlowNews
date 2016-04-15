@@ -10,13 +10,12 @@ public class NewsDao {
     private DaoFactory daoFactory = new DaoFactory();
 
     public List<News> getNewsByUser(String userName) throws DaoException {
-        String sql = "SELECT * FROM \"NEWS\" WHERE USER_ID=?";
+        String sql = "SELECT N.* FROM \"NEWS\" N INNER JOIN \"USER\" U ON N.\"USER_ID\"=U.\"ID\" WHERE U.\"NAME\"=?";
         List<News> news = new ArrayList<>();
 
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {
-            int id = new UserDao().getIdByName(userName);
-            statement.setInt(1, id);
+            statement.setString(1, userName);
 
             try (ResultSet resultSet = statement.executeQuery();) {
                 while (resultSet.next()) {
@@ -35,17 +34,17 @@ public class NewsDao {
     }
 
     public void addNews(String userName, News news) throws DaoException {
-        String sql = "INSERT INTO \"NEWS\" (USER_ID, TITLE, BODY, TEASER_LINK, SOURCE_LINK) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO \"NEWS\" (\"USER_ID\", \"TITLE\", \"BODY\", \"TEASER_LINK\", \"SOURCE_LINK\") " +
+                "(SELECT \"ID\", ?, ?, ?, ? FROM \"USER\" WHERE \"NAME\"=?)";
 
         try (Connection connection = daoFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            int id = new UserDao().getIdByName(userName);
-            statement.setInt(1, id);
-            statement.setString(2, news.getTitle());
-            statement.setString(3, news.getBody());
-            statement.setString(4, news.getTeaserLink());
-            statement.setString(5, news.getUrl());
+            statement.setString(1, news.getTitle());
+            statement.setString(2, news.getBody());
+            statement.setString(3, news.getTeaserLink());
+            statement.setString(4, news.getUrl());
+            statement.setString(5, userName);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("Cannot add news to DB", e);

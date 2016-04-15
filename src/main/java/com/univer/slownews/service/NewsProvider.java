@@ -5,5 +5,5 @@ import com.univer.slownews.model.News;
 import java.util.List;
 
 public interface NewsProvider {
-    public List<News> getNews();
+    List<News> getNews() throws ServiceException;
 }

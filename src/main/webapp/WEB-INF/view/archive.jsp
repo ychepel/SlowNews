@@ -3,7 +3,7 @@
 
 <c:import url="/WEB-INF/view/header.jsp"/>
 
-<div class="content">
+<div class="main-content">
     <ul class="news-list">
         <c:forEach items="${news}" var="newsItem" varStatus="newsItemStatus">
             <li class="list-item">

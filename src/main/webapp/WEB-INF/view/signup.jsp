@@ -3,6 +3,7 @@
 
 <c:import url="/WEB-INF/view/header.jsp"/>
 
+<div class="main-content">
 <div class="user-form">
     <form id="signup-form" class="user-form">
         <ul class="signup-list">
@@ -13,3 +14,4 @@
         </ul>
     </form>
  </div>
+</div>

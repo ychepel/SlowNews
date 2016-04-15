@@ -27,11 +27,11 @@ public class NewsGenerator implements NewsProvider {
     }};
 
     @Override
-    public List<News> getNews() {
+    public List<News> getNews() throws ServiceException {
         return makeFakeNews(10);
     }
 
-    public List<News> makeFakeNews(int count) {
+    public List<News> makeFakeNews(int count) throws ServiceException {
         List<News> news = new ArrayList<>();
         for(int i = 0; i < count ; i++) {
             String title = makeNewsTitle();
@@ -43,15 +43,15 @@ public class NewsGenerator implements NewsProvider {
         return news;
     }
 
-    private String makeNewsTitle() {
+    private String makeNewsTitle() throws ServiceException {
         return makeSentences(1);
     }
 
-    private String makeNewsBody() {
+    private String makeNewsBody() throws ServiceException {
         return makeSentences(5);
     }
 
-    private String makeSentences(int count) {
+    private String makeSentences(int count) throws ServiceException {
         StringBuilder textBuilder = new StringBuilder();
         for (int i = 0; i < count; i++) {
             int randomPattern = new Random().nextInt(SENTENCE_PATTERNS.size());
@@ -61,10 +61,14 @@ public class NewsGenerator implements NewsProvider {
         return textBuilder.toString();
     }
 
-    private String transformPattern(List<SentenceElement> pattern) {
+    private String transformPattern(List<SentenceElement> pattern) throws ServiceException {
         StringBuilder builder = new StringBuilder();
         for(SentenceElement element : pattern) {
-            builder.append(element.getElementValue());
+            try {
+                builder.append(element.getElementValue());
+            } catch (ModelException e) {
+                throw new ServiceException("Cannot transform string pattern.", e);
+            }
         }
         return clearingSentence(builder.toString());
     }

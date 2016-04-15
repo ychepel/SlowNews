@@ -3,6 +3,7 @@
 
 <c:import url="/WEB-INF/view/header.jsp"/>
 
+<div class="main-content">
 <form id="news-form">
     <div class="news-archive-buttons noshow">
         <div class="logo">
@@ -38,3 +39,4 @@
         </c:forEach>
     </ul>
 </form>
+</div>

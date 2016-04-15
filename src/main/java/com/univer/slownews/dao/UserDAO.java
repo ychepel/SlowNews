@@ -2,19 +2,17 @@ package com.univer.slownews.dao;
 
 import com.univer.slownews.model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
+import java.nio.charset.StandardCharsets;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UserDAO {
+public class UserDao {
     private DaoFactory daoFactory = new DaoFactory();
 
-    public Set<User> getUsers() {
-        Set<User> users = new HashSet<>();
+    public List<User> getUsers() throws DaoException {
         String sql = "SELECT * FROM \"USER\"";
+        List<User> users = new ArrayList<>();
 
         try (Connection connection = daoFactory.getConnection();
              Statement statement = connection.createStatement();
@@ -22,49 +20,30 @@ public class UserDAO {
 
             while (resultSet.next()) {
                 User user = new User();
-                user.setId(resultSet.getLong("ID"));
                 user.setName(resultSet.getString("NAME"));
                 user.setEmail(resultSet.getString("EMAIL"));
                 user.setPassword(resultSet.getString("PASSWORD"));
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException("Cannot add get users from DB", e);
         }
         return users;
     }
 
-    public void createUser(User user) {
-        String sql = "INSERT INTO \"USER\" (NAME, PASSWORD, EMAIL) VALUES (" +
-                "'" + user.getName() + "', " +
-                "'" + user.getPassword() + "', " +
-                "'" + user.getEmail() + "')";
+    public void addUser(User user) throws DaoException {
+        String sql = "INSERT INTO \"USER\" (\"NAME\", \"PASSWORD\", \"EMAIL\") VALUES (?, ?, ?)";
 
         try (Connection connection = daoFactory.getConnection();
-             Statement statement = connection.createStatement();
+             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet resultSet = statement.getGeneratedKeys();
-            resultSet.next();
-            Long id = resultSet.getLong(1);
-            user.setId(id);
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getEmail());
+            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DaoException("Cannot add user to DB", e);
         }
     }
 
-    public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-
-        User newUser = new User();
-        newUser.setName("bbb");
-        newUser.setEmail("b@dsad");
-        newUser.setPassword("security");
-
-        userDAO.createUser(newUser);
-
-        for (User user : userDAO.getUsers()) {
-            System.out.println(user.getId() + " " + user.getName() + " " + user.getEmail() + " " + user.getPassword());
-        }
-    }
 }

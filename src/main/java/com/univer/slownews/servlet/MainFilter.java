@@ -1,7 +1,5 @@
 package com.univer.slownews.servlet;
 
-import com.univer.slownews.service.WeatherProvider;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

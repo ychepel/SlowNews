@@ -3,6 +3,7 @@
 
 <c:import url="/WEB-INF/view/header.jsp"/>
 
+<div class="main-content">
 <div class="user-form">
     <form id="login-form" class="user-form">
         <ul>
@@ -11,4 +12,5 @@
             <li class="form-field"><button class="form-button" type="submit">Log in</button></li>
         </ul>
     </form>
+</div>
 </div>

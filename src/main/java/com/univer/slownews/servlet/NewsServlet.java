@@ -24,7 +24,12 @@ public class NewsServlet extends HttpServlet {
         else {
             newsReader = new WireNewsProvider();
         }
-        List<News> showNews = newsReader.getNews();
+        List<News> showNews = null;
+        try {
+            showNews = newsReader.getNews();
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         request.setAttribute("news", showNews);
 
         HttpSession session = request.getSession(true);
@@ -45,7 +50,6 @@ public class NewsServlet extends HttpServlet {
             int index = Integer.parseInt(newsIndex);
             try {
                 newsStorage.addNews(userName, showNews.get(index));
-                System.out.println(showNews.get(index).getTitle());
             } catch (ServiceException e) {
                 e.printStackTrace();
                 System.out.println(e);
