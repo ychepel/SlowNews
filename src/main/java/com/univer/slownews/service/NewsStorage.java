@@ -28,4 +28,14 @@ public class NewsStorage {
             throw new ServiceException("Cannot get news for user from DB", e);
         }
     }
+
+    public void removeNews(List<Integer> newsId) throws ServiceException {
+        NewsDao newsDao = new NewsDao();
+        try {
+            newsDao.removeNewsById(newsId);
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot remove archive news from DB", e);
+        }
+    }
+
 }

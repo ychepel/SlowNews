@@ -1,21 +1,39 @@
 $(function() {
-    function toggleClasses() {
+    function toggleNewsClasses() {
+        $(".header").toggleClass("noshow");
         $(".archive-checkbox").toggleClass("noshow");
         $(".news-link").toggleClass("noshow");
-        $(".news-archive-buttons").toggleClass("noshow");
+        $(".menu-buttons").toggleClass("noshow");
     }
 
     $(document).on("click", "a.news-link", function(){
-        toggleClasses();
+        toggleNewsClasses();
         $(this).parent().children("input.archive-checkbox").prop("checked", true);
     });
 
-    $(document).on("click", "a.cancel-saving", function(){
-        toggleClasses();
+    $(document).on("click", "a.menu-link.news.cancel", function(){
+        toggleNewsClasses();
         $("input.archive-checkbox").prop("checked", false);
     });
 
-    $(document).on("click", "a.save-selected", function(){
+    function toggleArchiveClasses() {
+        $(".header").toggleClass("noshow");
+        $(".remove-checkbox").toggleClass("noshow");
+        $(".archive-link").toggleClass("noshow");
+        $(".menu-buttons").toggleClass("noshow");
+    }
+
+    $(document).on("click", "a.archive-link", function(){
+        toggleArchiveClasses();
+        $(this).parent().children("input.remove-checkbox").prop("checked", true);
+    });
+
+    $(document).on("click", "a.menu-link.archive.cancel", function(){
+        toggleArchiveClasses();
+        $("input.remove-checkbox").prop("checked", false);
+    });
+
+    $(document).on("click", "a.menu-link.action", function(){
         event.preventDefault();
         var formData = "";
 

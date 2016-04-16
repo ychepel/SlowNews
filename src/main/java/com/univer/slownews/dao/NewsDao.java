@@ -19,11 +19,12 @@ public class NewsDao {
 
             try (ResultSet resultSet = statement.executeQuery();) {
                 while (resultSet.next()) {
+                    int id = resultSet.getInt("ID");
                     String title = resultSet.getString("TITLE");
                     String body = resultSet.getString("BODY");
                     String imageLink = resultSet.getString("TEASER_LINK");
                     String sourceLink = resultSet.getString("SOURCE_LINK");
-                    News currentNews = new News(title, body, imageLink, sourceLink);
+                    News currentNews = new News(id, title, body, imageLink, sourceLink);
                     news.add(currentNews);
                 }
             }
@@ -48,6 +49,24 @@ public class NewsDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException("Cannot add news to DB", e);
+        }
+    }
+
+    public void removeNewsById(List<Integer> newsId) throws DaoException {
+        String sql = "DELETE FROM \"NEWS\" WHERE \"ID\"=?";
+
+        try (Connection connection = connectionFactory.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+//            statement.setInt(1, newsId.get(0));
+//            statement.executeUpdate();
+            for(Integer id : newsId) {
+                statement.setInt(1, id);
+                statement.addBatch();
+            }
+            statement.executeBatch();
+        } catch (SQLException e) {
+            throw new DaoException("Cannot delete news by ID from DB", e);
         }
     }
 }

@@ -16,10 +16,20 @@ public class News {
     @XmlElement(name = "enclosure")
     private NewsImageLink imageLink = new NewsImageLink();
 
+    private int id;
+
     public News() {
     }
 
     public News(String title, String body, String teaserLink, String url) {
+        this.title = title;
+        this.body = body;
+        this.imageLink.setUrl(teaserLink);
+        this.url = url;
+    }
+
+    public News(int id, String title, String body, String teaserLink, String url) {
+        this.id = id;
         this.title = title;
         this.body = body;
         this.imageLink.setUrl(teaserLink);
@@ -58,4 +68,7 @@ public class News {
         this.url = url;
     }
 
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
 }

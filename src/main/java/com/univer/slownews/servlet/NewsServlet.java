@@ -30,7 +30,6 @@ public class NewsServlet extends HttpServlet {
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        request.setAttribute("news", showNews);
 
         HttpSession session = request.getSession(true);
         session.setAttribute("ShowNews", showNews);
@@ -52,7 +51,6 @@ public class NewsServlet extends HttpServlet {
                 newsStorage.addNews(userName, showNews.get(index));
             } catch (ServiceException e) {
                 e.printStackTrace();
-                System.out.println(e);
             }
         }
 

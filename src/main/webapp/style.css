@@ -11,11 +11,11 @@ body {
     display: inline-block;
     box-shadow: 0 3px 5px rgba(0,0,0,0.7);
     position: fixed;
-    z-index: 5;
+    z-index: 3;
 }
 
 .main-content {
-    padding-top: 50px;
+    padding-top: 70px;
     min-height: 370px;
 }
 
@@ -113,13 +113,13 @@ nav.menu {
     margin-right: 10px;
 }
 
-.text-content .news-body {
+.news-body {
     font-size: 12px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.text-content .news-links {
+.news-links {
     list-style: none;
     position: absolute;
     bottom: 10px;
@@ -127,18 +127,15 @@ nav.menu {
     font-size: 12px;
 }
 
-.text-content .news-links li {
+.news-links li {
     float: left;
     padding-left: 20px;
 }
 
-.text-content .news-link {
+.news-link, .archive-link {
     text-decoration: none;
     color: #767676;
     cursor: pointer;
-}
-
-.text-content .archive-checkbox {
 }
 
 .footer {
@@ -201,7 +198,6 @@ nav.menu {
 
 .message {
     text-align: center;
-    padding-top: 70px;
     color: #198627;
     font-weight: bold;
     font-size: 120%;
@@ -209,7 +205,6 @@ nav.menu {
 
 .error-message {
     text-align: center;
-    padding-top: 70px;
     color: #d13029;
     font-weight: bold;
     font-size: 120%;
@@ -228,8 +223,7 @@ nav.menu {
     display: none;
 }
 
-.news-archive-buttons {
-    background: #476;
+.menu-buttons {
     width: 100%;
     box-shadow: 0 3px 5px rgba(0,0,0,0.3);
     position: fixed;
@@ -238,12 +232,20 @@ nav.menu {
     z-index: 5;
 }
 
-.archive-list-menu {
+.menu-buttons.news {
+    background: #476;
+}
+
+.menu-buttons.archive {
+    background: #C06F69;
+}
+
+.news-list-menu {
     float: right;
     margin: 0;
 }
 
-.save-selected, .cancel-saving {
+.menu-link {
     cursor: pointer;
     display: block;
     text-transform: uppercase;
@@ -254,8 +256,12 @@ nav.menu {
     padding: 16px;
 }
 
-.save-selected:hover, .cancel-saving:hover {
+.menu-link.news:hover {
     background-color: #25463b;
+}
+
+.menu-link.archive:hover {
+    background-color: #6a1712;
 }
 
 .music-control {
