@@ -8,13 +8,13 @@ import javax.persistence.*;
 @Table(name = "\"USER\"")
 public class UserEntity {
     @Id
-    @Column(name = "ID")
+    @Column(name = "\"ID\"")
     private int id;
-    @Column(name = "NAME")
+    @Column(name = "\"NAME\"")
     private String name;
-    @Column(name = "PASSWORD")
+    @Column(name = "\"PASSWORD\"")
     private String password;
-    @Column(name = "EMAIL")
+    @Column(name = "\"EMAIL\"")
     private String email;
 
     public UserEntity(String name, String email, String password) {
