@@ -1,9 +1,9 @@
 package com.univer.slownews.model;
 
-import com.univer.slownews.service.SentencePartStorage;
+import com.univer.slownews.service.SentenceRandomElementStorage;
 import com.univer.slownews.service.ServiceException;
 
-public enum SentencePart implements SentenceElement {
+public enum SentenceRandomElement implements SentenceElement {
     ADJECTIVE,
     SUBJECT,
     VERB,
@@ -15,7 +15,7 @@ public enum SentencePart implements SentenceElement {
 
     @Override
     public String getElementValue() throws ModelException {
-        SentencePartStorage elementStorage = new SentencePartStorage();
+        SentenceRandomElementStorage elementStorage = new SentenceRandomElementStorage();
         try {
             return " " + elementStorage.getRandomElement(this.name());
         } catch (ServiceException e) {

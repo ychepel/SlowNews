@@ -1,6 +1,6 @@
 package com.univer.slownews.model;
 
-public enum SentenceInsertion implements SentenceElement {
+public enum SentenceConstantElement implements SentenceElement {
     POINT("."),
     EXCLAMATION("!"),
     COMMA(","),
@@ -13,7 +13,7 @@ public enum SentenceInsertion implements SentenceElement {
 
     private String value;
 
-    SentenceInsertion(String value) {
+    SentenceConstantElement(String value) {
         this.value = value;
     }
 

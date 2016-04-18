@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.univer.slownews.model.SentenceInsertion.*;
-import static com.univer.slownews.model.SentencePart.*;
+import static com.univer.slownews.model.SentenceConstantElement.*;
+import static com.univer.slownews.model.SentenceRandomElement.*;
 
 public class NewsGenerator implements NewsProvider {
 

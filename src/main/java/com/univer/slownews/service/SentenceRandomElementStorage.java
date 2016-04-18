@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SentencePartStorage {
+public class SentenceRandomElementStorage {
 
     private List<String> getParts(String type) throws ServiceException {
         SentencePartDao sentencePartDao = new SentencePartDao();
