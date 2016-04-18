@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsDao {
-    private ConnectionFactory connectionFactory = new ConnectionFactory();
+    private ConnectionProvider connectionProvider = new ConnectionProvider();
 
     public List<News> getNewsByUser(String userName) throws DaoException {
         String sql = "SELECT N.* FROM \"NEWS\" N INNER JOIN \"USER\" U ON N.\"USER_ID\"=U.\"ID\" WHERE U.\"NAME\"=?";
         List<News> news = new ArrayList<>();
 
-        try (Connection connection = connectionFactory.getConnection();
+        try (Connection connection = connectionProvider.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);) {
             statement.setString(1, userName);
 
@@ -38,7 +38,7 @@ public class NewsDao {
         String sql = "INSERT INTO \"NEWS\" (\"USER_ID\", \"TITLE\", \"BODY\", \"TEASER_LINK\", \"SOURCE_LINK\") " +
                 "(SELECT \"ID\", ?, ?, ?, ? FROM \"USER\" WHERE \"NAME\"=?)";
 
-        try (Connection connection = connectionFactory.getConnection();
+        try (Connection connection = connectionProvider.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, news.getTitle());
@@ -55,7 +55,7 @@ public class NewsDao {
     public void removeNewsById(List<Integer> newsId) throws DaoException {
         String sql = "DELETE FROM \"NEWS\" WHERE \"ID\"=?";
 
-        try (Connection connection = connectionFactory.getConnection();
+        try (Connection connection = connectionProvider.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 //            statement.setInt(1, newsId.get(0));
