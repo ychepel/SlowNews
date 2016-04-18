@@ -1,13 +1,16 @@
-package com.univer.slownews.model;
+package com.univer.slownews.hibernate;
 
-import org.hibernate.annotations.OptimisticLockType;
+import com.univer.slownews.hibernate.NewsEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "\"USER\"")
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"ID\"")
     private int id;
     @Column(name = "\"NAME\"")
@@ -16,6 +19,10 @@ public class UserEntity {
     private String password;
     @Column(name = "\"EMAIL\"")
     private String email;
+
+    @OneToMany
+    @JoinColumn(name="\"USER_ID\"", nullable = false)
+    private List<NewsEntity> archiveNews = new ArrayList<>();
 
     public UserEntity(String name, String email, String password) {
         setName(name);

@@ -11,7 +11,7 @@
         <property name="connection_pool_size">1</property>
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
-        <mapping class="com.univer.slownews.model.UserEntity"/>
-        <mapping class="com.univer.slownews.model.NewsEntity"/>
+        <mapping class="com.univer.slownews.hibernate.UserEntity"/>
+        <mapping class="com.univer.slownews.hibernate.NewsEntity"/>
     </session-factory>
 </hibernate-configuration>

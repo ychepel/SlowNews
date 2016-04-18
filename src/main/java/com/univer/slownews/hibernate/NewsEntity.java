@@ -1,6 +1,4 @@
-package com.univer.slownews.model;
-
-import org.hibernate.annotations.Type;
+package com.univer.slownews.hibernate;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,6 +26,7 @@ public class NewsEntity {
     private NewsImageLinkEntity imageLink = new NewsImageLinkEntity();
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"ID\"")
     private int id;
 
