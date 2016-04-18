@@ -58,8 +58,6 @@ public class NewsDao {
         try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-//            statement.setInt(1, newsId.get(0));
-//            statement.executeUpdate();
             for(Integer id : newsId) {
                 statement.setInt(1, id);
                 statement.addBatch();
