@@ -1,22 +1,31 @@
 package com.univer.slownews.model;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
+@Entity
+@Table(name = "news")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class News {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @XmlElement(name = "title")
     private String title;
-
     @XmlElement(name = "description")
     private String body;
-
+    @Column(name = "source_link")
     @XmlElement(name = "link")
     private String url;
-
+    @Embedded
     @XmlElement(name = "enclosure")
     private NewsImageLink imageLink = new NewsImageLink();
+    @ManyToOne(fetch=FetchType.LAZY)
+    private User user;
 
-    private int id;
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public News() {
     }

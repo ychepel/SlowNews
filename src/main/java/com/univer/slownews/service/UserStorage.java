@@ -8,13 +8,11 @@ import java.util.List;
 
 public class UserStorage {
     public void addUser(User user) throws ServiceException {
-        if (!containsUserName(user.getName())) {
-            UserDao userDao = new UserDao();
-            try {
-                userDao.addUser(user);
-            } catch (DaoException e) {
-               throw new ServiceException("Cannot add new user", e);
-            }
+        UserDao userDao = new UserDao();
+        try {
+            userDao.addUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot add new user", e);
         }
     }
 
@@ -30,7 +28,7 @@ public class UserStorage {
     }
 
     public boolean containsUserName(String username) throws ServiceException {
-        for (User user : getUsers() ) {
+        for (User user : getUsers()) {
             if (username.equals(user.getName())) {
                 return true;
             }
@@ -40,7 +38,7 @@ public class UserStorage {
 
     public List<User> getUsers() throws ServiceException {
         try {
-            List<User> users = new UserDao().getUsers();
+            List<User> users = new UserDao().findAll();
             return users;
         } catch (DaoException e) {
             throw new ServiceException("Cannot get users", e);

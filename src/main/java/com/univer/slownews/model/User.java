@@ -1,14 +1,24 @@
 package com.univer.slownews.model;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "`user`")
 public class User {
+    @Id
+    @SequenceGenerator(name="user_id_seq",
+            sequenceName="user_id_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="user_id_seq")
+    private int id;
     private String name;
     private String password;
     private String email;
+
+    @OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<News> news;
 
     public User(String name, String email, String password) {
         setName(name);
@@ -38,4 +48,11 @@ public class User {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

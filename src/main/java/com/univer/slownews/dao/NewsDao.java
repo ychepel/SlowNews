@@ -67,4 +67,20 @@ public class NewsDao {
             throw new DaoException("Cannot delete news by ID from DB", e);
         }
     }
+
+//    deleteById
+//    tx.begin();
+//    News news = manager.fing(News.class, newsId);
+//    manager.remove(news);
+//    tx.commit();
+//    catch(RuntimeException e) {
+//        tx.rollback();
+//        throw e;
+//    } finally {
+//        manager.close
+//    }
+
+//    findById
+//    return manager.find(News.class, newsId)
+
 }
