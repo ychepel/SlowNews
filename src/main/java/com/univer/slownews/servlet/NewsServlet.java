@@ -42,16 +42,20 @@ public class NewsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         List<News> showNews = (List<News>) session.getAttribute("ShowNews");
-
         String userName = (String) session.getAttribute("username");
+
+        UserStorage userStorage = new UserStorage();
         NewsStorage newsStorage = new NewsStorage();
-        for (String newsIndex : Collections.list(request.getParameterNames())) {
-            int index = Integer.parseInt(newsIndex);
-            try {
-                newsStorage.addNews(userName, showNews.get(index));
-            } catch (ServiceException e) {
-                e.printStackTrace();
+        try {
+            User currentUser = userStorage.getByName(userName);
+            for (String newsIndex : Collections.list(request.getParameterNames())) {
+                int index = Integer.parseInt(newsIndex);
+                News news = showNews.get(index);
+                news.setUser(currentUser);
+                newsStorage.addNews(news);
             }
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
 
         doGet(request, response);

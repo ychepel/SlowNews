@@ -4,6 +4,7 @@ import com.univer.slownews.dao.DaoException;
 import com.univer.slownews.dao.UserDao;
 import com.univer.slownews.model.User;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 public class UserStorage {
@@ -28,22 +29,32 @@ public class UserStorage {
     }
 
     public boolean containsUserName(String username) throws ServiceException {
-        for (User user : getUsers()) {
-            if (username.equals(user.getName())) {
-                return true;
-            }
+        try {
+            getByName(username);
+        } catch (ServiceException e) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public List<User> getUsers() throws ServiceException {
         try {
-            List<User> users = new UserDao().findAll();
+            List<User> users = new UserDao().getUsers();
             return users;
         } catch (DaoException e) {
             throw new ServiceException("Cannot get users", e);
         }
     }
 
+
+    public User getByName(String userName) throws ServiceException {
+        UserDao userDao = new UserDao();
+        try {
+            User user = userDao.getUserByName(userName);
+            return user;
+        } catch (DaoException e) {
+            throw new ServiceException("User not found by name.", e);
+        }
+    }
 
 }

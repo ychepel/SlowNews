@@ -5,19 +5,19 @@ import com.univer.slownews.servlet.ApplicationServletContextListener;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
 
-    public List<User> findAll() throws DaoException {
+    public List<User> getUsers() throws DaoException {
         EntityManager manager = ApplicationServletContextListener.createEntityManager();
         try {
             Query query = manager.createQuery("SELECT u FROM User u");
-            return query.getResultList();
+            List<User> users = query.getResultList();
+            return users;
+        } catch (RuntimeException e ) {
+            throw new DaoException("Cannot get users from DB", e);
         } finally {
             manager.close();
         }
@@ -30,9 +30,23 @@ public class UserDao {
             transaction.begin();
             manager.persist(user);
             transaction.commit();
+        } catch (RuntimeException e ) {
+            throw new DaoException("Cannot add user to DB", e);
         } finally {
             manager.close();
         }
     }
 
+    public User getUserByName(String userName) throws DaoException {
+        EntityManager manager = ApplicationServletContextListener.createEntityManager();
+        try {
+            Query query = manager.createQuery("SELECT u FROM User u WHERE name = :name");
+            query.setParameter("name", userName);
+            return (User) query.getSingleResult();
+        } catch (RuntimeException e ) {
+            throw new DaoException("Cannot get user by name from DB", e);
+        } finally {
+            manager.close();
+        }
+    }
 }
