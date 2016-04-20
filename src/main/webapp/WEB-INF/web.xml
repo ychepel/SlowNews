@@ -9,6 +9,10 @@
         <welcome-file>news</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>com.univer.slownews.servlet.ApplicationServletContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>MainPage</servlet-name>
         <servlet-class>com.univer.slownews.servlet.PageServlet</servlet-class>

@@ -1,70 +1,60 @@
 package com.univer.slownews.dao;
 
-import com.univer.slownews.model.News;
+import com.univer.slownews.entity.News;
+import com.univer.slownews.servlet.ApplicationServletContextListener;
 
-import java.sql.*;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 
 public class NewsDao {
-    private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<News> getNewsByUser(String userName) throws DaoException {
-        String sql = "SELECT N.* FROM \"NEWS\" N INNER JOIN \"USER\" U ON N.\"USER_ID\"=U.\"ID\" WHERE U.\"NAME\"=?";
-        List<News> news = new ArrayList<>();
-
-        try (Connection connection = connectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);) {
-            statement.setString(1, userName);
-
-            try (ResultSet resultSet = statement.executeQuery();) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("ID");
-                    String title = resultSet.getString("TITLE");
-                    String body = resultSet.getString("BODY");
-                    String imageLink = resultSet.getString("TEASER_LINK");
-                    String sourceLink = resultSet.getString("SOURCE_LINK");
-                    News currentNews = new News(id, title, body, imageLink, sourceLink);
-                    news.add(currentNews);
-                }
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Cannot add get news for user from DB", e);
+        EntityManager manager = ApplicationServletContextListener.createEntityManager();
+        try {
+            Query query = manager.createQuery("SELECT n FROM News n WHERE n.user.name = :name");
+            query.setParameter("name", userName);
+            List<News> news = query.getResultList();
+            return news;
+        } catch (RuntimeException e ) {
+            throw new DaoException("Cannot get news for user from DB", e);
+        } finally {
+            manager.close();
         }
-        return news;
     }
 
-    public void addNews(String userName, News news) throws DaoException {
-        String sql = "INSERT INTO \"NEWS\" (\"USER_ID\", \"TITLE\", \"BODY\", \"TEASER_LINK\", \"SOURCE_LINK\") " +
-                "(SELECT \"ID\", ?, ?, ?, ? FROM \"USER\" WHERE \"NAME\"=?)";
-
-        try (Connection connection = connectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-            statement.setString(1, news.getTitle());
-            statement.setString(2, news.getBody());
-            statement.setString(3, news.getTeaserLink());
-            statement.setString(4, news.getUrl());
-            statement.setString(5, userName);
-            statement.executeUpdate();
-        } catch (SQLException e) {
+    public void addNews(News news) throws DaoException {
+        EntityManager manager = ApplicationServletContextListener.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            manager.persist(news);
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
             throw new DaoException("Cannot add news to DB", e);
+        } finally {
+            manager.close();
         }
     }
 
     public void removeNewsById(List<Integer> newsId) throws DaoException {
-        String sql = "DELETE FROM \"NEWS\" WHERE \"ID\"=?";
-
-        try (Connection connection = connectionFactory.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-            for(Integer id : newsId) {
-                statement.setInt(1, id);
-                statement.addBatch();
+        EntityManager manager = ApplicationServletContextListener.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+        try {
+            transaction.begin();
+            for(int id : newsId) {
+                News news = manager.find(News.class, id);
+                manager.remove(news);
             }
-            statement.executeBatch();
-        } catch (SQLException e) {
-            throw new DaoException("Cannot delete news by ID from DB", e);
+            transaction.commit();
+        } catch (RuntimeException e) {
+            transaction.rollback();
+            throw new DaoException("Cannot remove news from DB", e);
+        } finally {
+            manager.close();
         }
     }
+
 }

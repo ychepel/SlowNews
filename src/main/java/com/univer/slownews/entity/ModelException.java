@@ -1,6 +1,4 @@
-package com.univer.slownews.model;
-
-import com.univer.slownews.service.ServiceException;
+package com.univer.slownews.entity;
 
 public class ModelException extends Exception {
     public ModelException() {

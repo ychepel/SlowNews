@@ -1,6 +1,6 @@
 package com.univer.slownews.service;
 
-import com.univer.slownews.model.News;
+import com.univer.slownews.entity.News;
 
 import java.util.List;
 

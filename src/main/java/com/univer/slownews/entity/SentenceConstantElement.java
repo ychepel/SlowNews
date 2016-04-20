@@ -1,4 +1,4 @@
-package com.univer.slownews.model;
+package com.univer.slownews.entity;
 
 public enum SentenceConstantElement implements SentenceElement {
     POINT("."),

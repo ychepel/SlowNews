@@ -1,14 +1,14 @@
 package com.univer.slownews.service;
 
-import com.univer.slownews.model.*;
+import com.univer.slownews.entity.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.univer.slownews.model.SentenceConstantElement.*;
-import static com.univer.slownews.model.SentenceRandomElement.*;
+import static com.univer.slownews.entity.SentenceConstantElement.*;
+import static com.univer.slownews.entity.SentenceRandomElement.*;
 
 public class NewsGenerator implements NewsProvider {
 

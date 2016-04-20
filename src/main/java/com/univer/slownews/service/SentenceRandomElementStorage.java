@@ -3,9 +3,6 @@ package com.univer.slownews.service;
 import com.univer.slownews.dao.DaoException;
 import com.univer.slownews.dao.SentencePartDao;
 
-import javax.servlet.ServletContext;
-import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

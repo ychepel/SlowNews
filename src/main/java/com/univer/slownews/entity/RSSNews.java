@@ -1,4 +1,4 @@
-package com.univer.slownews.model;
+package com.univer.slownews.entity;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;

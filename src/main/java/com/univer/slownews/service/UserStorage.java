@@ -2,19 +2,17 @@ package com.univer.slownews.service;
 
 import com.univer.slownews.dao.DaoException;
 import com.univer.slownews.dao.UserDao;
-import com.univer.slownews.model.User;
+import com.univer.slownews.entity.User;
 
 import java.util.List;
 
 public class UserStorage {
     public void addUser(User user) throws ServiceException {
-        if (!containsUserName(user.getName())) {
-            UserDao userDao = new UserDao();
-            try {
-                userDao.addUser(user);
-            } catch (DaoException e) {
-               throw new ServiceException("Cannot add new user", e);
-            }
+        UserDao userDao = new UserDao();
+        try {
+            userDao.addUser(user);
+        } catch (DaoException e) {
+            throw new ServiceException("Cannot add new user", e);
         }
     }
 
@@ -30,12 +28,12 @@ public class UserStorage {
     }
 
     public boolean containsUserName(String username) throws ServiceException {
-        for (User user : getUsers() ) {
-            if (username.equals(user.getName())) {
-                return true;
-            }
+        try {
+            getByName(username);
+        } catch (ServiceException e) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public List<User> getUsers() throws ServiceException {
@@ -47,5 +45,15 @@ public class UserStorage {
         }
     }
 
+
+    public User getByName(String userName) throws ServiceException {
+        UserDao userDao = new UserDao();
+        try {
+            User user = userDao.getUserByName(userName);
+            return user;
+        } catch (DaoException e) {
+            throw new ServiceException("User not found by name.", e);
+        }
+    }
 
 }

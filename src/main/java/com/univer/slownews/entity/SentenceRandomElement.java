@@ -1,4 +1,4 @@
-package com.univer.slownews.model;
+package com.univer.slownews.entity;
 
 import com.univer.slownews.service.SentenceRandomElementStorage;
 import com.univer.slownews.service.ServiceException;
