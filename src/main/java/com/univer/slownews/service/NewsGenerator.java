@@ -66,7 +66,7 @@ public class NewsGenerator implements NewsProvider {
         for(SentenceElement element : pattern) {
             try {
                 builder.append(element.getElementValue());
-            } catch (ModelException e) {
+            } catch (EntityException e) {
                 throw new ServiceException("Cannot transform string pattern.", e);
             }
         }

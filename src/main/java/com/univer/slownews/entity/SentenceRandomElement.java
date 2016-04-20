@@ -14,12 +14,12 @@ public enum SentenceRandomElement implements SentenceElement {
     QUESTION;
 
     @Override
-    public String getElementValue() throws ModelException {
+    public String getElementValue() throws EntityException {
         SentenceRandomElementStorage elementStorage = new SentenceRandomElementStorage();
         try {
             return " " + elementStorage.getRandomElement(this.name());
         } catch (ServiceException e) {
-            throw new ModelException("Cannot receive elements value from DB.", e);
+            throw new EntityException("Cannot receive elements value from DB.", e);
         }
     }
 }
