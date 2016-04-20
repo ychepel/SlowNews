@@ -2,7 +2,7 @@ package com.univer.slownews.service;
 
 import com.univer.slownews.dao.DaoException;
 import com.univer.slownews.dao.NewsDao;
-import com.univer.slownews.model.News;
+import com.univer.slownews.entity.News;
 
 import java.util.List;
 

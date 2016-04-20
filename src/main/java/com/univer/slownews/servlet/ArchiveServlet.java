@@ -1,6 +1,6 @@
 package com.univer.slownews.servlet;
 
-import com.univer.slownews.model.News;
+import com.univer.slownews.entity.News;
 import com.univer.slownews.service.NewsStorage;
 import com.univer.slownews.service.ServiceException;
 

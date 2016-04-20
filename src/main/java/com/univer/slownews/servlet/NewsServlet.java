@@ -1,6 +1,6 @@
 package com.univer.slownews.servlet;
 
-import com.univer.slownews.model.*;
+import com.univer.slownews.entity.*;
 import com.univer.slownews.service.*;
 
 import javax.servlet.RequestDispatcher;

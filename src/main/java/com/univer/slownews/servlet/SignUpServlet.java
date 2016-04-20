@@ -1,6 +1,6 @@
 package com.univer.slownews.servlet;
 
-import com.univer.slownews.model.User;
+import com.univer.slownews.entity.User;
 import com.univer.slownews.service.PasswordEncryptionService;
 import com.univer.slownews.service.ServiceException;
 import com.univer.slownews.service.UserStorage;

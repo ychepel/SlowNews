@@ -1,14 +1,11 @@
 package com.univer.slownews.dao;
 
-import com.univer.slownews.model.News;
-import com.univer.slownews.model.User;
+import com.univer.slownews.entity.News;
 import com.univer.slownews.servlet.ApplicationServletContextListener;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsDao {

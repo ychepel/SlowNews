@@ -2,9 +2,8 @@ package com.univer.slownews.service;
 
 import com.univer.slownews.dao.DaoException;
 import com.univer.slownews.dao.UserDao;
-import com.univer.slownews.model.User;
+import com.univer.slownews.entity.User;
 
-import javax.persistence.NoResultException;
 import java.util.List;
 
 public class UserStorage {

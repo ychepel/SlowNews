@@ -1,6 +1,6 @@
 package com.univer.slownews.dao;
 
-import com.univer.slownews.model.User;
+import com.univer.slownews.entity.User;
 import com.univer.slownews.servlet.ApplicationServletContextListener;
 
 import javax.persistence.EntityManager;

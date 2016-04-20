@@ -1,8 +1,8 @@
 package com.univer.slownews.service;
 
-import com.univer.slownews.model.News;
+import com.univer.slownews.entity.News;
 
-import com.univer.slownews.model.RSSNews;
+import com.univer.slownews.entity.RSSNews;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

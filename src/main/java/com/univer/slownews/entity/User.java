@@ -1,4 +1,4 @@
-package com.univer.slownews.model;
+package com.univer.slownews.entity;
 
 import javax.persistence.*;
 import java.util.List;

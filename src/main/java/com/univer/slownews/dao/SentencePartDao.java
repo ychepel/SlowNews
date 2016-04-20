@@ -1,15 +1,9 @@
 package com.univer.slownews.dao;
 
-import com.univer.slownews.model.User;
 import com.univer.slownews.servlet.ApplicationServletContextListener;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SentencePartDao {
