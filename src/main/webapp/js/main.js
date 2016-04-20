@@ -92,7 +92,7 @@ $(function() {
 
     $(document).ready(function() {
         var audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', 'media/music.mp3');
+        audioElement.setAttribute('src', 'http://cast.loungefm.com.ua/terrace128');
         audioElement.setAttribute('autoplay', 'autoplay');
         $.get();
         audioElement.addEventListener("load", function () {
