@@ -3,7 +3,7 @@ package com.univer.slownews.servlet;
 import com.univer.slownews.entity.User;
 import com.univer.slownews.service.PasswordEncryptionService;
 import com.univer.slownews.service.ServiceException;
-import com.univer.slownews.service.UserStorage;
+import com.univer.slownews.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserStorage storage = new UserStorage();
+        UserService storage = new UserService();
         try {
             String username = request.getParameter("username");
             String originalPassword = request.getParameter("password");

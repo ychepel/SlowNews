@@ -44,15 +44,15 @@ public class NewsServlet extends HttpServlet {
         List<News> showNews = (List<News>) session.getAttribute("ShowNews");
         String userName = (String) session.getAttribute("username");
 
-        UserStorage userStorage = new UserStorage();
-        NewsStorage newsStorage = new NewsStorage();
+        UserService userService = new UserService();
+        NewsService newsService = new NewsService();
         try {
-            User currentUser = userStorage.getByName(userName);
+            User currentUser = userService.getByName(userName);
             for (String newsIndex : Collections.list(request.getParameterNames())) {
                 int index = Integer.parseInt(newsIndex);
                 News news = showNews.get(index);
                 news.setUser(currentUser);
-                newsStorage.addNews(news);
+                newsService.addNews(news);
             }
         } catch (ServiceException e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
 package com.univer.slownews.entity;
 
-import com.univer.slownews.service.SentenceRandomElementStorage;
+import com.univer.slownews.service.SentenceRandomElementService;
 import com.univer.slownews.service.ServiceException;
 
 public enum SentenceRandomElement implements SentenceElement {
@@ -15,7 +15,7 @@ public enum SentenceRandomElement implements SentenceElement {
 
     @Override
     public String getElementValue() throws EntityException {
-        SentenceRandomElementStorage elementStorage = new SentenceRandomElementStorage();
+        SentenceRandomElementService elementStorage = new SentenceRandomElementService();
         try {
             return " " + elementStorage.getRandomElement(this.name());
         } catch (ServiceException e) {

@@ -6,7 +6,7 @@ import com.univer.slownews.dao.SentencePartDao;
 import java.util.List;
 import java.util.Random;
 
-public class SentenceRandomElementStorage {
+public class SentenceRandomElementService {
 
     private List<String> getParts(String type) throws ServiceException {
         SentencePartDao sentencePartDao = new SentencePartDao();

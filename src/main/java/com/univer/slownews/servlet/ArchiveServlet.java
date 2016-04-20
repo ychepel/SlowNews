@@ -1,7 +1,7 @@
 package com.univer.slownews.servlet;
 
 import com.univer.slownews.entity.News;
-import com.univer.slownews.service.NewsStorage;
+import com.univer.slownews.service.NewsService;
 import com.univer.slownews.service.ServiceException;
 
 import javax.servlet.RequestDispatcher;
@@ -21,10 +21,10 @@ public class ArchiveServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String userName = (String) session.getAttribute("username");
-        NewsStorage newsStorage = new NewsStorage();
+        NewsService newsService = new NewsService();
         List<News> archiveNews = new ArrayList<>();
         try {
-            archiveNews = newsStorage.getUserNews(userName);
+            archiveNews = newsService.getUserNews(userName);
         } catch (ServiceException e) {
             e.printStackTrace();
             System.out.println(e);
@@ -42,9 +42,9 @@ public class ArchiveServlet extends HttpServlet {
             removeIds.add(index);
         }
 
-        NewsStorage newsStorage = new NewsStorage();
+        NewsService newsService = new NewsService();
         try {
-            newsStorage.removeNews(removeIds);
+            newsService.removeNews(removeIds);
         } catch (ServiceException e) {
             e.printStackTrace();
         }

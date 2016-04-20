@@ -6,7 +6,7 @@ import com.univer.slownews.entity.User;
 
 import java.util.List;
 
-public class UserStorage {
+public class UserService {
     public void addUser(User user) throws ServiceException {
         UserDao userDao = new UserDao();
         try {

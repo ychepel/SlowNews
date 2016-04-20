@@ -6,7 +6,7 @@ import com.univer.slownews.entity.News;
 
 import java.util.List;
 
-public class NewsStorage {
+public class NewsService {
     public void addNews(News news) throws ServiceException {
         NewsDao newsDao = new NewsDao();
         try {

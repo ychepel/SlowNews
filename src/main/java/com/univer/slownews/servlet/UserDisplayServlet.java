@@ -2,7 +2,7 @@ package com.univer.slownews.servlet;
 
 import com.univer.slownews.entity.User;
 import com.univer.slownews.service.ServiceException;
-import com.univer.slownews.service.UserStorage;
+import com.univer.slownews.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import java.util.List;
 @WebServlet("/content/userlist")
 public class UserDisplayServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserStorage storage = new UserStorage();
+        UserService storage = new UserService();
         List<User> users = new ArrayList<>();
         try {
             users = storage.getUsers();
