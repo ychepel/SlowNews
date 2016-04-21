@@ -10,7 +10,7 @@ public class UserDao {
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<User> getUsers() throws DaoException {
-        String sql = "SELECT * FROM \"USER\"";
+        String sql = "SELECT * FROM \"user\"";
         List<User> users = new ArrayList<>();
 
         try (Connection connection = connectionFactory.getConnection();
@@ -19,9 +19,9 @@ public class UserDao {
 
             while (resultSet.next()) {
                 User user = new User();
-                user.setName(resultSet.getString("NAME"));
-                user.setEmail(resultSet.getString("EMAIL"));
-                user.setPassword(resultSet.getString("PASSWORD"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -31,7 +31,7 @@ public class UserDao {
     }
 
     public void addUser(User user) throws DaoException {
-        String sql = "INSERT INTO \"USER\" (\"NAME\", \"PASSWORD\", \"EMAIL\") VALUES (?, ?, ?)";
+        String sql = "INSERT INTO \"user\" (name, password, email) VALUES (?, ?, ?)";
 
         try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);

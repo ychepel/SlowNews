@@ -10,7 +10,7 @@ public class NewsDao {
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<News> getNewsByUser(String userName) throws DaoException {
-        String sql = "SELECT N.* FROM \"NEWS\" N INNER JOIN \"USER\" U ON N.\"USER_ID\"=U.\"ID\" WHERE U.\"NAME\"=?";
+        String sql = "SELECT N.* FROM news N INNER JOIN \"user\" U ON N.user_id=U.id WHERE U.name=?";
         List<News> news = new ArrayList<>();
 
         try (Connection connection = connectionFactory.getConnection();
@@ -19,11 +19,11 @@ public class NewsDao {
 
             try (ResultSet resultSet = statement.executeQuery();) {
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("ID");
-                    String title = resultSet.getString("TITLE");
-                    String body = resultSet.getString("BODY");
-                    String imageLink = resultSet.getString("TEASER_LINK");
-                    String sourceLink = resultSet.getString("SOURCE_LINK");
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String body = resultSet.getString("body");
+                    String imageLink = resultSet.getString("teaser_link");
+                    String sourceLink = resultSet.getString("source_link");
                     News currentNews = new News(id, title, body, imageLink, sourceLink);
                     news.add(currentNews);
                 }
@@ -35,8 +35,8 @@ public class NewsDao {
     }
 
     public void addNews(String userName, News news) throws DaoException {
-        String sql = "INSERT INTO \"NEWS\" (\"USER_ID\", \"TITLE\", \"BODY\", \"TEASER_LINK\", \"SOURCE_LINK\") " +
-                "(SELECT \"ID\", ?, ?, ?, ? FROM \"USER\" WHERE \"NAME\"=?)";
+        String sql = "INSERT INTO news (user_id, title, body, teaser_link, source_link) " +
+                "(SELECT id, ?, ?, ?, ? FROM \"user\" WHERE name=?)";
 
         try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
@@ -53,13 +53,11 @@ public class NewsDao {
     }
 
     public void removeNewsById(List<Integer> newsId) throws DaoException {
-        String sql = "DELETE FROM \"NEWS\" WHERE \"ID\"=?";
+        String sql = "DELETE FROM news WHERE id=?";
 
         try (Connection connection = connectionFactory.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-//            statement.setInt(1, newsId.get(0));
-//            statement.executeUpdate();
             for(Integer id : newsId) {
                 statement.setInt(1, id);
                 statement.addBatch();

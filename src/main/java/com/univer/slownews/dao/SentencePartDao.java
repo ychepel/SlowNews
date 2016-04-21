@@ -11,7 +11,7 @@ public class SentencePartDao {
     private ConnectionFactory connectionFactory = new ConnectionFactory();
 
     public List<String> getParts(String type) throws DaoException {
-        String sql = "SELECT * FROM \"SENTENCE_PART\" WHERE \"TYPE\"=?;";
+        String sql = "SELECT * FROM sentence_part WHERE type=?;";
         List<String> parts = new ArrayList<>();
 
         try (Connection connection = connectionFactory.getConnection();
@@ -20,7 +20,7 @@ public class SentencePartDao {
 
             try (ResultSet resultSet = statement.executeQuery();) {
                 while (resultSet.next()) {
-                    String part = resultSet.getString("VALUE");
+                    String part = resultSet.getString("value");
                     parts.add(part);
                 }
             }
