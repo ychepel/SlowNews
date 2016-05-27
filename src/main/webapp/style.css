@@ -241,6 +241,7 @@ nav.menu {
 }
 
 .news-list-menu {
+    list-style-type: none;
     float: right;
     margin: 0;
 }
