@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="header">
+<header>
     <div class="logo">
         <a id="logo-link" href="."><img src="images/logo.png"></a>
     </div>
@@ -36,4 +36,4 @@
             </c:if>
         </ul>
     </nav>
-</div>
+</header>

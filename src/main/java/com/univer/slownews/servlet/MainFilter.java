@@ -14,6 +14,12 @@ public class MainFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        System.out.println("getRemoteAddr: " + servletRequest.getRemoteAddr());
+        System.out.println("getRemoteHost: " + servletRequest.getRemoteHost());
+        System.out.println("getLocalAddr: " + servletRequest.getLocalAddr());
+        System.out.println("getLocalAddr: " + servletRequest.getServerPort());
+        System.out.println("getRequestURI: " + ((HttpServletRequest) servletRequest).getRequestURI());
+        System.out.println();
         servletRequest.setAttribute("uri", ((HttpServletRequest) servletRequest).getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
     }
